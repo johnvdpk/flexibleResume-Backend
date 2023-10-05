@@ -1,6 +1,7 @@
 package com.example.flexibleresume.services;
 
 import com.example.flexibleresume.dtos.JobSeekerDto;
+import com.example.flexibleresume.dtos.JobSeekerInputDto;
 import com.example.flexibleresume.models.JobSeeker;
 import com.example.flexibleresume.repositorys.JobSeekerRepository;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,11 @@ public class JobSeekerService {
         this.jobSeekerRepos = jobSeekerRepos;
     }
 
+
+
+
     // JobSeeker naar JobSeekerDto. Database richting client.
-    public JobSeekerDto clientToDatabase(JobSeeker jobSeeker) {
+    public JobSeekerDto jobSeekerToDto(JobSeeker jobSeeker) {
     JobSeekerDto jobSeekerDto = new JobSeekerDto();
 
     jobSeekerDto.setId(jobSeeker.getId());
@@ -36,7 +40,22 @@ public class JobSeekerService {
 
 
     // InputDto naar JobSeeker. Client richting Database
+    public JobSeeker inputDtoToJobSeeker(JobSeekerInputDto jobSeekerInputDto) {
+        JobSeeker jobSeeker = new JobSeeker();
 
+        jobSeeker.setId(jobSeekerInputDto.getId());
+        jobSeeker.setFirstName(jobSeekerInputDto.getFirstName());
+        jobSeeker.setSurName(jobSeekerInputDto.getSurName());
+        jobSeeker.setDateOfBirth(jobSeekerInputDto.getDateOfBirth());
+        jobSeeker.setEmail(jobSeekerInputDto.getEmail());
+        jobSeeker.setZipCode(jobSeekerInputDto.getZipCode());
+        jobSeeker.setHomeAddress(jobSeekerInputDto.getHomeAddress());
+
+        return jobSeeker;
+    }
+
+
+    // Alle Gets
 
 
     public List<JobSeeker> getAllJobSeekers(Optional<Long> id) {
@@ -48,6 +67,34 @@ public class JobSeekerService {
 
 
     }
+
+    public JobSeekerDto getJobSeekerByFirstName(String firstName) {
+        Optional<JobSeeker> optionalJobSeekerName = jobSeekerRepos.findByFirstName(firstName);
+        JobSeekerDto jobSeekerDto = new JobSeekerDto();
+
+        if (optionalJobSeekerName.isPresent()) {
+            JobSeeker jobSeekerEntity = optionalJobSeekerName.get();
+            jobSeekerDto = jobSeekerToDto(jobSeekerEntity);
+        }
+
+        return jobSeekerDto;
+    }
+
+
+    // add
+    // note to myself. InputDto wordt omgezet naar het model. En vervolgens wordt het weer terug gegegeven aan de dto
+
+    public JobSeekerDto addJobSeeker(JobSeekerInputDto jobSeekerInputDto) {
+        JobSeeker jobseeker = inputDtoToJobSeeker(jobSeekerInputDto);
+        jobSeekerRepos.save(jobseeker);
+
+        return jobSeekerToDto(jobseeker);
+
+
+
+    }
+
+
 
 
 }

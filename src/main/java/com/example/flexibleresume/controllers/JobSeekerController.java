@@ -1,13 +1,15 @@
 package com.example.flexibleresume.controllers;
 
+import com.example.flexibleresume.dtos.JobSeekerDto;
+import com.example.flexibleresume.dtos.JobSeekerInputDto;
 import com.example.flexibleresume.models.JobSeeker;
 import com.example.flexibleresume.services.JobSeekerService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +32,29 @@ public class JobSeekerController {
     return ResponseEntity.ok().body(jobSeekers);
 
     }
+
+    // Op voornaam zoeken in jobseekers
+    @GetMapping("/{firstName}")
+    public ResponseEntity<JobSeekerDto> getJobSeekerByFirstName(@PathVariable String firstName) {
+        JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerByFirstName(firstName);
+
+        return ResponseEntity.ok(jobSeekerDto);
+
+
+    }
+
+    @PostMapping
+    public ResponseEntity<JobSeekerDto> addJobSeeker(@Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
+        JobSeekerDto jobSeekerDto = jobSeekerService.addJobSeeker(jobSeekerInputDto);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(jobSeekerDto.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(jobSeekerDto);
+    }
+
 
 
 
