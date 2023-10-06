@@ -18,6 +18,13 @@ import java.util.Optional;
 public class JobSeekerController {
 
 
+    // Je kan op id, voornaam, achternaam en op iedereen zoeken.
+    // Je kan een persoon toevoegen aan de jobseekers.
+    //TODO er moet nog een update optie en een delete optie worden toegevoegd.
+
+
+
+
     private final JobSeekerService jobSeekerService;
 
     public JobSeekerController(JobSeekerService jobSeekerService) {
@@ -33,17 +40,23 @@ public class JobSeekerController {
 
     }
 
-    // Op voornaam zoeken in jobseekers
+
     @GetMapping("/{firstName}")
     public ResponseEntity<JobSeekerDto> getJobSeekerByFirstName(@PathVariable String firstName) {
         JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerByFirstName(firstName);
 
         return ResponseEntity.ok(jobSeekerDto);
-
-
     }
 
-    @PostMapping
+    @GetMapping("/{surName}")
+    public ResponseEntity<JobSeekerDto> getJobSeekerBySurName(@PathVariable String surName) {
+        JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerBySurName(surName);
+
+        return ResponseEntity.ok(jobSeekerDto);
+    }
+
+
+    @PostMapping()
     public ResponseEntity<JobSeekerDto> addJobSeeker(@Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
         JobSeekerDto jobSeekerDto = jobSeekerService.addJobSeeker(jobSeekerInputDto);
 
