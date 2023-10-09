@@ -22,7 +22,7 @@ public class JobSeeker {
     private LocalDate dateOfBirth;
     @Column(name = "email", length = 50)
     private String email;
-    @Column(name = "phonenumbers", length = 20)
+    @Column(name = "phone_numbers", length = 20)
     private String phoneNumber;
     @Column(name = "zipcodes", length = 6)
     private String zipCode;

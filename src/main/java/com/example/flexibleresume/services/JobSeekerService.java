@@ -110,7 +110,6 @@ public class JobSeekerService {
     }
 
 
-//TODO controleren of deze functie werkt
     public JobSeekerDto updateJobSeeker(Long id,JobSeekerInputDto jobSeekerInputDto) {
         Optional<JobSeeker> jobSeeker = jobSeekerRepos.findById(id);
 
@@ -135,10 +134,11 @@ public class JobSeekerService {
         }
 
 
-
     }
 
-
+    public void deleteJobSeeker(Long id) {
+        jobSeekerRepos.deleteById(id);
+    }
 
 
 }

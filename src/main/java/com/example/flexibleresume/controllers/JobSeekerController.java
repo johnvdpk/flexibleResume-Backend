@@ -18,13 +18,6 @@ import java.util.Optional;
 public class JobSeekerController {
 
 
-    // Je kan op id, voornaam, achternaam en op iedereen zoeken.
-    // Je kan een persoon toevoegen aan de jobseekers.
-    //TODO er moet nog een update optie en een delete optie worden toegevoegd.
-
-
-
-
     private final JobSeekerService jobSeekerService;
 
     public JobSeekerController(JobSeekerService jobSeekerService) {
@@ -40,21 +33,19 @@ public class JobSeekerController {
 
     }
 
-
-    @GetMapping("/{firstName}")
+    @GetMapping("/voornaam/{firstName}")
     public ResponseEntity<JobSeekerDto> getJobSeekerByFirstName(@PathVariable String firstName) {
         JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerByFirstName(firstName);
 
         return ResponseEntity.ok(jobSeekerDto);
     }
 
-    @GetMapping("/{surName}")
+    @GetMapping("/achternaam/{surName}")
     public ResponseEntity<JobSeekerDto> getJobSeekerBySurName(@PathVariable String surName) {
         JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerBySurName(surName);
 
         return ResponseEntity.ok(jobSeekerDto);
     }
-
 
     @PostMapping()
     public ResponseEntity<JobSeekerDto> addJobSeeker(@Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
@@ -68,7 +59,19 @@ public class JobSeekerController {
         return ResponseEntity.created(location).body(jobSeekerDto);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<JobSeekerDto> updateJobSeeker(@PathVariable Long id, @Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
+        JobSeekerDto jobSeekerDto = jobSeekerService.updateJobSeeker(id, jobSeekerInputDto);
 
+        return ResponseEntity.ok().body(jobSeekerDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<JobSeekerDto> deleteJobSeeker(@PathVariable Long id) {
+        jobSeekerService.deleteJobSeeker(id);
+
+        return ResponseEntity.noContent().build();
+    }
 
 
 }
