@@ -32,8 +32,10 @@ public class JobSeekerService {
     jobSeekerDto.setSurName(jobSeeker.getSurName());
     jobSeekerDto.setDateOfBirth(jobSeeker.getDateOfBirth());
     jobSeekerDto.setEmail(jobSeeker.getEmail());
+    jobSeekerDto.setPhoneNumber(jobSeeker.getPhoneNumber());
     jobSeekerDto.setZipCode(jobSeeker.getZipCode());
     jobSeekerDto.setHomeAddress(jobSeeker.getHomeAddress());
+    jobSeekerDto.setHouseNumber(jobSeeker.getHouseNumber());
 
     return jobSeekerDto;
 
@@ -49,8 +51,10 @@ public class JobSeekerService {
         jobSeeker.setSurName(jobSeekerInputDto.getSurName());
         jobSeeker.setDateOfBirth(jobSeekerInputDto.getDateOfBirth());
         jobSeeker.setEmail(jobSeekerInputDto.getEmail());
+        jobSeeker.setPhoneNumber(jobSeekerInputDto.getPhoneNumber());
         jobSeeker.setZipCode(jobSeekerInputDto.getZipCode());
         jobSeeker.setHomeAddress(jobSeekerInputDto.getHomeAddress());
+        jobSeeker.setHouseNumber(jobSeekerInputDto.getHouseNumber());
 
         return jobSeeker;
     }
@@ -118,8 +122,10 @@ public class JobSeekerService {
             updateJobSeeker.setSurName(jobSeekerInputDto.getSurName());
             updateJobSeeker.setDateOfBirth(jobSeekerInputDto.getDateOfBirth());
             updateJobSeeker.setEmail(jobSeekerInputDto.getEmail());
+            updateJobSeeker.setPhoneNumber(jobSeekerInputDto.getPhoneNumber());
             updateJobSeeker.setZipCode(jobSeekerInputDto.getZipCode());
             updateJobSeeker.setHomeAddress(jobSeekerInputDto.getHomeAddress());
+            updateJobSeeker.setHouseNumber(jobSeekerInputDto.getHouseNumber());
             JobSeeker updatedJobSeeker = jobSeekerRepos.save(updateJobSeeker);
 
             return jobSeekerToDto(updatedJobSeeker);
