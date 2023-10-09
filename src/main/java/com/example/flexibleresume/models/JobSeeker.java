@@ -9,48 +9,46 @@ import java.time.LocalDate;
 public class JobSeeker {
 
     // @Collum geef ik altijd aan, dit is overzichtelijker.
+    // Telefoonnummer, huisnummer en postcode zijn allemaal strings. Het kan zijn dat er andere tekens dan cijfers in voor komen en er worden geen berekeningen mee gemaakt.
 
     @Id
     @GeneratedValue
     private Long id;
-    @Column(name="first_name", length = 20)
+    @Column(name = "first_name", length = 20)
     private String firstName;
-    @Column(name="sur_name", length = 50)
+    @Column(name = "sur_name", length = 50)
     private String surName;
-
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
-
-    //Ik zou ervoor kunnen kiezen om het adres in een andere table te maken (one to one);
-    //@OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "address_id")
-
-    @Column(name= "email",length = 50)
+    @Column(name = "email", length = 50)
     private String email;
-    @Column(name="zipcodes", length = 6)
+    @Column(name = "phone_numbers", length = 20)
+    private String phoneNumber;
+    @Column(name = "zipcodes", length = 6)
     private String zipCode;
-    @Column(name="home_addresses", length = 100)
+    @Column(name = "home_addresses", length = 100)
     private String homeAddress;
-
-
-
+    @Column(name = "house_numbers", length = 5)
+    private String houseNumber;
 
 
     //  De contructor, gevuld en leeg.
 
-    public JobSeeker(Long id, String firstName, String surName, LocalDate dateOfBirth, String email, String zipCode, String homeAddress) {
+    public JobSeeker(Long id, String firstName, String surName, LocalDate dateOfBirth, String email, String phoneNumber, String zipCode, String homeAddress, String houseNumber) {
         this.id = id;
         this.firstName = firstName;
         this.surName = surName;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
+        this.phoneNumber = phoneNumber;
         this.zipCode = zipCode;
         this.homeAddress = homeAddress;
+        this.houseNumber = houseNumber;
     }
 
-    public JobSeeker(){}
+    public JobSeeker() {
 
-
+    }
 
     // Getters en Setters
 
@@ -95,6 +93,14 @@ public class JobSeeker {
         this.email = email;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getZipCode() {
         return zipCode;
     }
@@ -109,5 +115,13 @@ public class JobSeeker {
 
     public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
     }
 }

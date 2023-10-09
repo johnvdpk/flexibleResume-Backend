@@ -8,11 +8,13 @@ public class JobSeekerDto {
     private String surName;
     private LocalDate dateOfBirth;
     private String email;
+    private String phoneNumber;
     private String zipCode;
     private String homeAddress;
+    private String houseNumber;
 
 
-
+    //constructor
     public JobSeekerDto(){}
 
 
@@ -60,6 +62,14 @@ public class JobSeekerDto {
         this.email = email;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getZipCode() {
         return zipCode;
     }
@@ -74,5 +84,13 @@ public class JobSeekerDto {
 
     public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(String houseNumer) {
+        this.houseNumber = houseNumer;
     }
 }
