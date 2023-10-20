@@ -7,7 +7,7 @@ import com.example.flexibleresume.services.JobSeekerService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+//import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
@@ -47,17 +47,17 @@ public class JobSeekerController {
         return ResponseEntity.ok(jobSeekerDto);
     }
 
-    @PostMapping()
-    public ResponseEntity<JobSeekerDto> addJobSeeker(@Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
-        JobSeekerDto jobSeekerDto = jobSeekerService.addJobSeeker(jobSeekerInputDto);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(jobSeekerDto.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).body(jobSeekerDto);
-    }
+//    @PostMapping()
+//    public ResponseEntity<JobSeekerDto> addJobSeeker(@Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
+//        JobSeekerDto jobSeekerDto = jobSeekerService.addJobSeeker(jobSeekerInputDto);
+//
+//        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+//                .path("/{id}")
+//                .buildAndExpand(jobSeekerDto.getId())
+//                .toUri();
+//
+//        return ResponseEntity.created(location).body(jobSeekerDto);
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<JobSeekerDto> updateJobSeeker(@PathVariable Long id, @Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {

@@ -12,6 +12,11 @@ public class WorkInfo {
     @GeneratedValue
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "cv_id")
+    private CV cv;
+
+
     @Column(name="jobtitles")
     private String jobTitle;
 
@@ -24,9 +29,7 @@ public class WorkInfo {
     @Column(name="job_information")
     private String jobInfo;
 
-    @ManyToOne
-    @JoinColumn(name = "cv_id")
-    private CV cv;
+
 
 
 
