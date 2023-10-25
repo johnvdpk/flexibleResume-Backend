@@ -31,6 +31,8 @@ public class JobSeeker {
     @Column(name = "house_numbers", length = 5)
     private String houseNumber;
 
+    //TODO woonplaats nog toevoegen 'Hometown'
+
     @OneToOne
     @JoinColumn(name="resumes")
     private CV cv;

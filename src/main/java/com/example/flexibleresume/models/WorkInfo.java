@@ -16,13 +16,12 @@ public class WorkInfo {
     @JoinColumn(name = "cv_id")
     private CV cv;
 
-
-    @Column(name="jobtitles")
-    private String jobTitle;
-
     @Column(name="companys")
     private String company;
 
+    @Column(name="jobtitles")
+    private String jobTitle;
+    
     @Column(name="period_of_employment")
     private String PeriodOfEmployment;
 
