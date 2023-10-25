@@ -98,7 +98,7 @@ public class JobSeekerService {
     }
 
 
-    // add
+
     // note to myself. InputDto wordt omgezet naar het model. En vervolgens wordt het weer terug gegegeven aan de dto
 
     public JobSeekerDto addJobSeeker(JobSeekerInputDto jobSeekerInputDto) {
