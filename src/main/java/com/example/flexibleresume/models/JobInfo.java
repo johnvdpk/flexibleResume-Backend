@@ -20,12 +20,31 @@ public class JobInfo {
     @Column(name = "job_descriptions", length=1000)
     private String jobDescription;
 
-    @Column(name = "job_requirements", length = 1000)  // de functie omschrijven kan opgedeeld worden in meedere colommen. voor nu is het 1 bericht / alinea naar wens van de werkgever.
+    @Column(name = "job_requirements", length = 1000)  // Algemene job requirements naast de skills, education en years of experience
     private String jobRequirements;
-    // TODO de functie omschrijving uitwerken in meedere colommen. Welke skills, opleiding, jaar ervaring is gewenst. etc
-    @Column(name = "job_offers", length = 1000)
+
+    @Column(name= "skills")
+    private String skill;
+
+    @Column(name= "educations")
+    private String education;
+
+    @Column(name="years_of_experience")
+    private String yearsOfExperience;
+
+    @Column(name = "job_offers", length = 1000)  // Algemene job offers, naast salary indication en extras
     private String jobOffer;
-    // TODO de functie job_offer uitwerken in meedere colommen. Wat is het salaris, auto van de zaak? thuiswerken mogelijk?
+
+    @Column(name = "salary_indications")
+    private String salaryIndication;
+
+
+    @Column(name = "extras")
+    private String extras;
+
+
+
+
 
 
 }

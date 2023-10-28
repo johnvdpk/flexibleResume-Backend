@@ -1,3 +1,5 @@
+-- WERKZOEKDENDE
+
 INSERT INTO jobseekers (id, first_name, sur_name, date_of_birth, email, phone_numbers, zipcodes, home_addresses, house_numbers)
 VALUES
 (1, 'John', 'Doe', '1986-05-04', 'johndoe@email.com','0632654897', '3423ET', 'destraat','54b'),
@@ -5,7 +7,6 @@ VALUES
 
 INSERT INTO resumes (id,about_me, jobseeker_id)
 VALUES
-    -- aan dit id wordt de inof work, study en personal gekoppelt
     (1,'Dit is een kort stukje over John.', 1),
     (2,'Een beschrijving over Alex.', 2);
 
@@ -29,4 +30,18 @@ VALUES
     (3, 'Universiteit Utrecht', 'Antropologie','2012-2018', 'Wat kan je vertellen over antropologie', 2),
     (4, 'MBO Grafisch Lyceum', 'Multimedia vormgeven' ,'2006-2010','Een extra beschrijving wat voor studie dit is', 2);
 
+-- WERKGEVER
 
+INSERT INTO employers (id,companys, industries, office_addresses, office_adress_numbers, office_zipcode, office_city_locations, kvk_number, missions, visions, number_of_employees)
+
+VALUES
+    (1, 'TechCorp', 'IT', 'Technostraat 5', '5A', '1001AB', 'Amsterdam', '12345678', 'Onze missie is om technologie toegankelijk te maken voor iedereen.', 'Een wereld waarin technologie het dagelijks leven verbetert.', '500'),
+    (2, 'GreenFields', 'Landbouw', 'Farmweg 12', '12B', '2002CD', 'Rotterdam', '23456789', 'We streven naar duurzame landbouw.', 'Een wereld waarin iedereen toegang heeft tot vers en duurzaam voedsel.', '150'),
+    (3, 'FinanceGroup', 'Financiën', 'Bankplein 8', '8C', '3003DE', 'Utrecht', '34567890', 'Wij zetten ons in voor financiële transparantie.', 'Een wereld waarin financiële zekerheid voor iedereen toegankelijk is.', '250');
+
+
+INSERT INTO job_info (id, Employer_id, job_descriptions, job_requirements, skills, educations, years_of_experience, job_offers, salary_indications, extras)
+VALUES
+    (1, 1, 'Ontwikkeling en onderhoud van webapplicaties.', 'Ervaring met Java en Spring Boot. Kennis van cloudtechnologieën.', 'Java, Spring Boot, AWS', 'HBO/WO Informatica of vergelijkbaar.', '3-5 jaar', 'Flexibele werktijden, mogelijkheid tot thuiswerken.', '€3000 - €5000', 'Bonusregeling, laptop van de zaak.'),
+    (2, 2, 'Begeleiding van duurzame landbouwprojecten.', 'Kennis van duurzame landbouwtechnieken. Goede communicatieve vaardigheden.', 'Projectmanagement, Duurzaamheid', 'HBO/WO Landbouwkunde of vergelijkbaar.', '2-4 jaar', 'Mogelijkheid tot bijscholing. Reiskostenvergoeding.', '€2500 - €4000', 'Korting op biologische producten.'),
+    (3, 3, 'Analyse en advisering op financieel gebied.', 'Ervaring met financiële analyse. Kennis van financiële software.', 'Excel, Financiële analyse', 'HBO/WO Bedrijfseconomie of vergelijkbaar.', '4-6 jaar', 'Mogelijkheid tot verdere specialisatie.', '€3500 - €6000', 'Pensioenregeling, jaarlijkse bonus.');
