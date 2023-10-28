@@ -37,5 +37,60 @@ public class CV {
     private List<StudyInfo> studyInfos = new ArrayList<>();
 
 
+    public CV(Long id, String aboutme, JobSeeker jobSeeker, List<WorkInfo> workInfos, List<PersonalInfo> personalInfos, List<StudyInfo> studyInfos) {
+        this.id = id;
+        this.aboutme = aboutme;
+        this.jobSeeker = jobSeeker;
+        this.workInfos = workInfos;
+        this.personalInfos = personalInfos;
+        this.studyInfos = studyInfos;
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAboutme() {
+        return aboutme;
+    }
+
+    public void setAboutme(String aboutme) {
+        this.aboutme = aboutme;
+    }
+
+    public JobSeeker getJobSeeker() {
+        return jobSeeker;
+    }
+
+    public void setJobSeeker(JobSeeker jobSeeker) {
+        this.jobSeeker = jobSeeker;
+    }
+
+    public List<WorkInfo> getWorkInfos() {
+        return workInfos;
+    }
+
+    public void setWorkInfos(List<WorkInfo> workInfos) {
+        this.workInfos = workInfos;
+    }
+
+    public List<PersonalInfo> getPersonalInfos() {
+        return personalInfos;
+    }
+
+    public void setPersonalInfos(List<PersonalInfo> personalInfos) {
+        this.personalInfos = personalInfos;
+    }
+
+    public List<StudyInfo> getStudyInfos() {
+        return studyInfos;
+    }
+
+    public void setStudyInfos(List<StudyInfo> studyInfos) {
+        this.studyInfos = studyInfos;
+    }
 }

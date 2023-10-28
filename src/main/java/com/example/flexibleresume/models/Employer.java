@@ -46,5 +46,114 @@ public class Employer {
     private String numberOfEmployees;
 
 
+    public Employer(List<JobInfo> jobInfos, Long id, String company, String industry, String officeAdress, String getOfficeAdressNumber, String officeZipcode, String officeCityLocation, String kvk, String mission, String vision, String numberOfEmployees) {
+        this.jobInfos = jobInfos;
+        this.id = id;
+        this.company = company;
+        this.industry = industry;
+        this.officeAdress = officeAdress;
+        this.getOfficeAdressNumber = getOfficeAdressNumber;
+        this.officeZipcode = officeZipcode;
+        this.officeCityLocation = officeCityLocation;
+        this.kvk = kvk;
+        this.mission = mission;
+        this.vision = vision;
+        this.numberOfEmployees = numberOfEmployees;
+    }
 
+    public List<JobInfo> getJobInfos() {
+        return jobInfos;
+    }
+
+    public void setJobInfos(List<JobInfo> jobInfos) {
+        this.jobInfos = jobInfos;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(String industry) {
+        this.industry = industry;
+    }
+
+    public String getOfficeAdress() {
+        return officeAdress;
+    }
+
+    public void setOfficeAdress(String officeAdress) {
+        this.officeAdress = officeAdress;
+    }
+
+    public String getGetOfficeAdressNumber() {
+        return getOfficeAdressNumber;
+    }
+
+    public void setGetOfficeAdressNumber(String getOfficeAdressNumber) {
+        this.getOfficeAdressNumber = getOfficeAdressNumber;
+    }
+
+    public String getOfficeZipcode() {
+        return officeZipcode;
+    }
+
+    public void setOfficeZipcode(String officeZipcode) {
+        this.officeZipcode = officeZipcode;
+    }
+
+    public String getOfficeCityLocation() {
+        return officeCityLocation;
+    }
+
+    public void setOfficeCityLocation(String officeCityLocation) {
+        this.officeCityLocation = officeCityLocation;
+    }
+
+    public String getKvk() {
+        return kvk;
+    }
+
+    public void setKvk(String kvk) {
+        this.kvk = kvk;
+    }
+
+    public String getMission() {
+        return mission;
+    }
+
+    public void setMission(String mission) {
+        this.mission = mission;
+    }
+
+    public String getVision() {
+        return vision;
+    }
+
+    public void setVision(String vision) {
+        this.vision = vision;
+    }
+
+    public String getNumberOfEmployees() {
+        return numberOfEmployees;
+    }
+
+    public void setNumberOfEmployees(String numberOfEmployees) {
+        this.numberOfEmployees = numberOfEmployees;
+    }
 }
