@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/werkzoekende") // website is voor nu in het nederlands
+@RequestMapping("/werkzoekende") // website is in het Nederlands
 public class JobSeekerController {
 
 
