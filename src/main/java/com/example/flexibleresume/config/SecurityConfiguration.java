@@ -4,6 +4,7 @@ import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -23,14 +24,30 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
 
         http
-                .csrf()
-                .disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
+                .csrf(csrf -> csrf.disable())
+                .httpBasic(basic -> basic.disable())
+                .authorizeHttpRequests(auth ->
+                        auth
+
+//         .requestMatchers("/**").permitAll()
+
+                 .requestMatchers("/auth/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                .requestMatchers(HttpMethod.POST,"/auth/authenticate").permitAll()
+                .requestMatchers("/werkzoekende/**").hasAnyRole("USER", "ADMIN")
+//                .requestMatchers(HttpMethod.GET,"/werkzoekende/**").hasAnyRole("USER","ADMIN")
+
+                                .requestMatchers("/bedrijf/**").hasAnyRole("COMPANY", "ADMIN")
+//                .requestMatchers("/authenticated").authenticated()
+//                .requestMatchers("/authenticate").permitAll()
+                .anyRequest().authenticated()
+
+                )
+
+                // amicode
+//
+//                .anyRequest().authenticated() // hier moet je ingelogd zijn.
+//                .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

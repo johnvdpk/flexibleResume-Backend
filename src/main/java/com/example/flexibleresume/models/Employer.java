@@ -10,7 +10,7 @@ import java.util.List;
 public class Employer {
 
     @OneToMany(mappedBy = "employer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<JobInfo> jobInfos = new ArrayList<>();
+    private List<EmployerJobInfo> jobInfos = new ArrayList<>();
 
 
     @Id
@@ -46,7 +46,7 @@ public class Employer {
     private String numberOfEmployees;
 
 
-    public Employer(List<JobInfo> jobInfos, Long id, String company, String industry, String officeAdress, String getOfficeAdressNumber, String officeZipcode, String officeCityLocation, String kvk, String mission, String vision, String numberOfEmployees) {
+    public Employer(List<EmployerJobInfo> jobInfos, Long id, String company, String industry, String officeAdress, String getOfficeAdressNumber, String officeZipcode, String officeCityLocation, String kvk, String mission, String vision, String numberOfEmployees) {
         this.jobInfos = jobInfos;
         this.id = id;
         this.company = company;
@@ -61,11 +61,11 @@ public class Employer {
         this.numberOfEmployees = numberOfEmployees;
     }
 
-    public List<JobInfo> getJobInfos() {
+    public List<EmployerJobInfo> getJobInfos() {
         return jobInfos;
     }
 
-    public void setJobInfos(List<JobInfo> jobInfos) {
+    public void setJobInfos(List<EmployerJobInfo> jobInfos) {
         this.jobInfos = jobInfos;
     }
 

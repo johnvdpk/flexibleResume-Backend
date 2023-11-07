@@ -47,7 +47,7 @@ VALUES
     (3, 'FinanceGroup', 'Financiën', 'Bankplein 8', '8C', '3003DE', 'Utrecht', '34567890', 'Wij zetten ons in voor financiële transparantie.', 'Een wereld waarin financiële zekerheid voor iedereen toegankelijk is.', '250');
 
 
-INSERT INTO job_info (id, Employer_id, job_descriptions, job_requirements, skills, educations, years_of_experience, job_offers, salary_indications, extras)
+INSERT INTO employer_job_info (id, Employer_id, job_descriptions, job_requirements, skills, educations, years_of_experience, job_offers, salary_indications, extras)
 VALUES
     (1, 1, 'Ontwikkeling en onderhoud van webapplicaties.', 'Ervaring met Java en Spring Boot. Kennis van cloudtechnologieën.', 'Java, Spring Boot, AWS', 'HBO/WO Informatica of vergelijkbaar.', '3-5 jaar', 'Flexibele werktijden, mogelijkheid tot thuiswerken.', '€3000 - €5000', 'Bonusregeling, laptop van de zaak.'),
     (2, 2, 'Begeleiding van duurzame landbouwprojecten.', 'Kennis van duurzame landbouwtechnieken. Goede communicatieve vaardigheden.', 'Projectmanagement, Duurzaamheid', 'HBO/WO Landbouwkunde of vergelijkbaar.', '2-4 jaar', 'Mogelijkheid tot bijscholing. Reiskostenvergoeding.', '€2500 - €4000', 'Korting op biologische producten.'),
@@ -56,6 +56,6 @@ VALUES
 
 -- SECURITY TEST
 
-INSERT INTO users (id, firstname, lastname, email, password, role)
+INSERT INTO users (id, email, password, role)
 VALUES
-    (100,'John', 'Doe', 'johndoe@mail.com', '1234', 'USER');
+    (100, 'johndoe@mail.com', '1234', 'USER');

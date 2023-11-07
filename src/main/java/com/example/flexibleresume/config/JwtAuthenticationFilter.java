@@ -18,7 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
-@RequiredArgsConstructor // via de dependencie Lombok hoef ik nu geen "final private" te gebruiken
+@RequiredArgsConstructor // Dependency Lombok maakt automatisch de final constructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;

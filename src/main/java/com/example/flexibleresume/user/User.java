@@ -27,12 +27,15 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue
     private Long id;
-    private String firstname;
-    private String lastname;
+//    private String firstname;
+//    private String lastname;
+
+    // Alleen email en password is voldoende.
+
     private String email;
     private String password;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING) // Zodoende de optie een rol te benoemen per user.
     private Role role;
 
     @Override

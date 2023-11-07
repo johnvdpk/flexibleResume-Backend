@@ -4,8 +4,8 @@ package com.example.flexibleresume.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "job_info")
-public class JobInfo {
+@Table(name = "employer_job_info")
+public class EmployerJobInfo {
 
     @Id
     @GeneratedValue
@@ -43,7 +43,7 @@ public class JobInfo {
     private String extras;
 
 
-    public JobInfo(Long id, Employer employer, String jobDescription, String jobRequirements, String skill, String education, String yearsOfExperience, String jobOffer, String salaryIndication, String extras) {
+    public EmployerJobInfo(Long id, Employer employer, String jobDescription, String jobRequirements, String skill, String education, String yearsOfExperience, String jobOffer, String salaryIndication, String extras) {
         this.id = id;
         this.employer = employer;
         this.jobDescription = jobDescription;

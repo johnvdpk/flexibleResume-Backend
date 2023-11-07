@@ -13,6 +13,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/werkzoekende") // website is in het Nederlands
 public class JobSeekerController {
@@ -25,7 +26,7 @@ public class JobSeekerController {
     }
 
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<JobSeeker>>getAllJobSeekers(@RequestParam(value = "id", required = false)Optional<Long> id) {
         List<JobSeeker> jobSeekers = jobSeekerService.getAllJobSeekers(id);
 
