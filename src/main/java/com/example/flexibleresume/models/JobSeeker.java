@@ -1,5 +1,6 @@
 package com.example.flexibleresume.models;
 
+import com.example.flexibleresume.user.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -16,6 +17,10 @@ public class JobSeeker {
     //Een 'jobseeker' werkzoekende kan meedere CV's hebben. Dit wordt eigenlijk in de frontend gedaan. maar voor de zekerheid is er een onetomany koppeling gemaakt.
     @OneToMany(mappedBy = "jobSeeker", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CV> cvs = new ArrayList<>();
+
+    // One-to-One relatie met User entity
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "jobSeeker")
+    private User user;
 
 
     @Id
@@ -58,9 +63,12 @@ public class JobSeeker {
         this.houseNumber = houseNumber;
     }
 
-    public JobSeeker() {
+    public JobSeeker() {}
 
-    }
+//    Een lege constructor, ook wel een no-argument constructor genoemd,
+//    is belangrijk in Java en specifiek in het gebruik van frameworks die
+//    reflectie gebruiken, zoals JPA (Java Persistence API),
+//    Hibernate en vele andere Java-frameworks en -bibliotheken.
 
     // Getters en Setters
 

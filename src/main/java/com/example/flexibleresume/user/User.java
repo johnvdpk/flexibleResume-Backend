@@ -1,6 +1,7 @@
 package com.example.flexibleresume.user;
 
 
+import com.example.flexibleresume.models.JobSeeker;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,12 @@ import java.util.List;
 @Entity
 @Table(name="users")
 public class User implements UserDetails {
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "jobseeker_id") // Deze kolom zal in de 'users' tabel worden aangemaakt.
+    private JobSeeker jobSeeker;
+
+
 
     @Id
     @GeneratedValue

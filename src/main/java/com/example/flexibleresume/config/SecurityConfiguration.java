@@ -29,11 +29,11 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth ->
                         auth
 
-//         .requestMatchers("/**").permitAll()
+         .requestMatchers("/**").permitAll()
 
                  .requestMatchers("/auth/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                .requestMatchers(HttpMethod.POST,"/auth/authenticate").permitAll()
+//                .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+//                .requestMatchers(HttpMethod.POST,"/auth/authenticate").permitAll()
                 .requestMatchers("/werkzoekende/**").hasAnyRole("USER", "ADMIN")
 //                .requestMatchers(HttpMethod.GET,"/werkzoekende/**").hasAnyRole("USER","ADMIN")
 

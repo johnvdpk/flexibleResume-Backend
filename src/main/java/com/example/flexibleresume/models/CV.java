@@ -46,6 +46,8 @@ public class CV {
         this.studyInfos = studyInfos;
     }
 
+    public CV() {}
+
     public Long getId() {
         return id;
     }

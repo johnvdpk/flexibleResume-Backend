@@ -32,6 +32,8 @@ public class PersonalInfo {
         this.hobbyInfo = hobbyInfo;
     }
 
+    public PersonalInfo(){}
+
     public CV getCv() {
         return cv;
     }

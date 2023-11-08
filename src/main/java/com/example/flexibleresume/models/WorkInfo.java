@@ -38,6 +38,8 @@ public class WorkInfo {
         this.jobInfo = jobInfo;
     }
 
+    public WorkInfo() {}
+
     public CV getCv() {
         return cv;
     }

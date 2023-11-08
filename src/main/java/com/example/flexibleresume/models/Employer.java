@@ -61,6 +61,8 @@ public class Employer {
         this.numberOfEmployees = numberOfEmployees;
     }
 
+    public Employer(){}
+
     public List<EmployerJobInfo> getJobInfos() {
         return jobInfos;
     }

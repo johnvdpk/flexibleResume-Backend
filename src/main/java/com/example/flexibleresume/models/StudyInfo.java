@@ -37,6 +37,8 @@ public class StudyInfo {
         this.studyInfo = studyInfo;
     }
 
+    public StudyInfo(){}
+
     public CV getCv() {
         return cv;
     }

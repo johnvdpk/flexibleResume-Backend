@@ -56,6 +56,9 @@ public class EmployerJobInfo {
         this.extras = extras;
     }
 
+    public EmployerJobInfo(){}
+
+
     public Long getId() {
         return id;
     }
