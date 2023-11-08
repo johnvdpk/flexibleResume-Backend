@@ -4,7 +4,9 @@ import com.example.flexibleresume.dtos.JobSeekerDto;
 import com.example.flexibleresume.dtos.JobSeekerInputDto;
 import com.example.flexibleresume.models.JobSeeker;
 import com.example.flexibleresume.services.JobSeekerService;
+import com.example.flexibleresume.user.User;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 //import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -59,6 +61,15 @@ public class JobSeekerController {
 //
 //        return ResponseEntity.created(location).body(jobSeekerDto);
 //    }
+
+    @PostMapping
+    public ResponseEntity<JobSeekerDto> addJobSeeker(@RequestBody JobSeekerInputDto jobSeekerInputDto) {
+
+        JobSeekerDto jobSeekerDto = jobSeekerService.addJobSeeker(jobSeekerInputDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(jobSeekerDto);
+    }
+
+
 
     @PutMapping("/{id}")
     public ResponseEntity<JobSeekerDto> updateJobSeeker(@PathVariable Long id, @Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {

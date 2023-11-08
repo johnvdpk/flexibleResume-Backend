@@ -5,6 +5,8 @@ import com.example.flexibleresume.dtos.JobSeekerInputDto;
 import com.example.flexibleresume.exceptions.RecordNotFoundException;
 import com.example.flexibleresume.models.JobSeeker;
 import com.example.flexibleresume.repositorys.JobSeekerRepository;
+import com.example.flexibleresume.repositorys.UserRepository;
+import com.example.flexibleresume.user.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,11 +17,12 @@ import java.util.Optional;
 public class JobSeekerService {
 
     private final JobSeekerRepository jobSeekerRepos;
+    private final UserRepository userRepos;
 
-    public JobSeekerService(JobSeekerRepository jobSeekerRepos) {
+    public JobSeekerService(JobSeekerRepository jobSeekerRepos, UserRepository userRepos) {
         this.jobSeekerRepos = jobSeekerRepos;
+        this.userRepos = userRepos;
     }
-
 
 
 
@@ -27,7 +30,7 @@ public class JobSeekerService {
     public JobSeekerDto jobSeekerToDto(JobSeeker jobSeeker) {
     JobSeekerDto jobSeekerDto = new JobSeekerDto();
 
-    jobSeekerDto.setId(jobSeeker.getId());
+
     jobSeekerDto.setFirstName(jobSeeker.getFirstName());
     jobSeekerDto.setSurName(jobSeeker.getSurName());
     jobSeekerDto.setDateOfBirth(jobSeeker.getDateOfBirth());
@@ -46,7 +49,7 @@ public class JobSeekerService {
     public JobSeeker inputDtoToJobSeeker(JobSeekerInputDto jobSeekerInputDto) {
         JobSeeker jobSeeker = new JobSeeker();
 
-        jobSeeker.setId(jobSeekerInputDto.getId());
+
         jobSeeker.setFirstName(jobSeekerInputDto.getFirstName());
         jobSeeker.setSurName(jobSeekerInputDto.getSurName());
         jobSeeker.setDateOfBirth(jobSeekerInputDto.getDateOfBirth());
@@ -101,8 +104,16 @@ public class JobSeekerService {
 
     // note to myself. InputDto wordt omgezet naar het model. En vervolgens wordt het weer terug gegegeven aan de dto
 
+    //Long userId
     public JobSeekerDto addJobSeeker(JobSeekerInputDto jobSeekerInputDto) {
+
+        // Vind de User op basis van userId
+//
+//        User user = userRepos.findById(userId)
+//                .orElseThrow(() -> new RecordNotFoundException("Geen user met gegeven id gevonden"));
+
         JobSeeker jobseeker = inputDtoToJobSeeker(jobSeekerInputDto);
+//        jobseeker.setUser(user);
         jobSeekerRepos.save(jobseeker);
 
         return jobSeekerToDto(jobseeker);
@@ -116,7 +127,6 @@ public class JobSeekerService {
         if(jobSeeker.isPresent()) {
             JobSeeker updateJobSeeker = new JobSeeker();
 
-            updateJobSeeker.setId(jobSeekerInputDto.getId());
             updateJobSeeker.setFirstName(jobSeekerInputDto.getFirstName());
             updateJobSeeker.setSurName(jobSeekerInputDto.getSurName());
             updateJobSeeker.setDateOfBirth(jobSeekerInputDto.getDateOfBirth());
