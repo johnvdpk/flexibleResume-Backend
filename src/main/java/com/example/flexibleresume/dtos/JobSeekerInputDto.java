@@ -24,6 +24,8 @@ public class JobSeekerInputDto {
     @NotBlank
     private String phoneNumber;
     @NotBlank
+    private String homeTown;
+    @NotBlank
     private String zipCode;
     @NotBlank
     private String homeAddress;

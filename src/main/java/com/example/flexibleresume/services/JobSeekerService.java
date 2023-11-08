@@ -103,17 +103,10 @@ public class JobSeekerService {
 
 
     // note to myself. InputDto wordt omgezet naar het model. En vervolgens wordt het weer terug gegegeven aan de dto
-
-    //Long userId
-    public JobSeekerDto addJobSeeker(JobSeekerInputDto jobSeekerInputDto) {
-
-        // Vind de User op basis van userId
-//
-//        User user = userRepos.findById(userId)
-//                .orElseThrow(() -> new RecordNotFoundException("Geen user met gegeven id gevonden"));
+//Long userId
+    public JobSeekerDto addJobSeeker(JobSeekerInputDto jobSeekerInputDto ) {
 
         JobSeeker jobseeker = inputDtoToJobSeeker(jobSeekerInputDto);
-//        jobseeker.setUser(user);
         jobSeekerRepos.save(jobseeker);
 
         return jobSeekerToDto(jobseeker);
@@ -124,6 +117,7 @@ public class JobSeekerService {
     public JobSeekerDto updateJobSeeker(Long id,JobSeekerInputDto jobSeekerInputDto) {
         Optional<JobSeeker> jobSeeker = jobSeekerRepos.findById(id);
 
+
         if(jobSeeker.isPresent()) {
             JobSeeker updateJobSeeker = new JobSeeker();
 
@@ -132,6 +126,7 @@ public class JobSeekerService {
             updateJobSeeker.setDateOfBirth(jobSeekerInputDto.getDateOfBirth());
             updateJobSeeker.setEmail(jobSeekerInputDto.getEmail());
             updateJobSeeker.setPhoneNumber(jobSeekerInputDto.getPhoneNumber());
+            updateJobSeeker.setHomeTown(jobSeekerInputDto.getHomeTown());
             updateJobSeeker.setZipCode(jobSeekerInputDto.getZipCode());
             updateJobSeeker.setHomeAddress(jobSeekerInputDto.getHomeAddress());
             updateJobSeeker.setHouseNumber(jobSeekerInputDto.getHouseNumber());

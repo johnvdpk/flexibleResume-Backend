@@ -63,7 +63,8 @@ public class JobSeekerController {
 //    }
 
     @PostMapping
-    public ResponseEntity<JobSeekerDto> addJobSeeker(@RequestBody JobSeekerInputDto jobSeekerInputDto) {
+    public ResponseEntity<JobSeekerDto> addJobSeeker(@RequestBody JobSeekerInputDto jobSeekerInputDto)
+                                                     {
 
         JobSeekerDto jobSeekerDto = jobSeekerService.addJobSeeker(jobSeekerInputDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(jobSeekerDto);
