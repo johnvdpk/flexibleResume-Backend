@@ -1,9 +1,15 @@
 package com.example.flexibleresume.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="work_info")
 public class WorkInfo {
@@ -29,62 +35,5 @@ public class WorkInfo {
     private String jobInfo;
 
 
-    public WorkInfo(CV cv, Long id, String company, String jobTitle, String periodOfEmployment, String jobInfo) {
-        this.cv = cv;
-        this.id = id;
-        this.company = company;
-        this.jobTitle = jobTitle;
-        this.periodOfEmployment = periodOfEmployment;
-        this.jobInfo = jobInfo;
-    }
 
-    public WorkInfo() {}
-
-    public CV getCv() {
-        return cv;
-    }
-
-    public void setCv(CV cv) {
-        this.cv = cv;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public String getJobTitle() {
-        return jobTitle;
-    }
-
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
-    }
-
-    public String getPeriodOfEmployment() {
-        return periodOfEmployment;
-    }
-
-    public void setPeriodOfEmployment(String periodOfEmployment) {
-        this.periodOfEmployment = periodOfEmployment;
-    }
-
-    public String getJobInfo() {
-        return jobInfo;
-    }
-
-    public void setJobInfo(String jobInfo) {
-        this.jobInfo = jobInfo;
-    }
 }

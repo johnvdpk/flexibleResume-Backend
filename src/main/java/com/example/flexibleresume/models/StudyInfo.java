@@ -2,7 +2,13 @@ package com.example.flexibleresume.models;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="study_info")
 public class StudyInfo {
@@ -28,62 +34,5 @@ public class StudyInfo {
     private String studyInfo;
 
 
-    public StudyInfo(CV cv, long id, String educationalInstitute, String education, String periodOfStudy, String studyInfo) {
-        this.cv = cv;
-        this.id = id;
-        this.educationalInstitute = educationalInstitute;
-        this.education = education;
-        this.periodOfStudy = periodOfStudy;
-        this.studyInfo = studyInfo;
-    }
 
-    public StudyInfo(){}
-
-    public CV getCv() {
-        return cv;
-    }
-
-    public void setCv(CV cv) {
-        this.cv = cv;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getEducationalInstitute() {
-        return educationalInstitute;
-    }
-
-    public void setEducationalInstitute(String educationalInstitute) {
-        this.educationalInstitute = educationalInstitute;
-    }
-
-    public String getEducation() {
-        return education;
-    }
-
-    public void setEducation(String education) {
-        this.education = education;
-    }
-
-    public String getPeriodOfStudy() {
-        return periodOfStudy;
-    }
-
-    public void setPeriodOfStudy(String periodOfStudy) {
-        this.periodOfStudy = periodOfStudy;
-    }
-
-    public String getStudyInfo() {
-        return studyInfo;
-    }
-
-    public void setStudyInfo(String studyInfo) {
-        this.studyInfo = studyInfo;
-    }
 }
