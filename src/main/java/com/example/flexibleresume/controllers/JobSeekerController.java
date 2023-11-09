@@ -72,9 +72,9 @@ public class JobSeekerController {
 
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<JobSeekerDto> updateJobSeeker(@PathVariable Long id, @Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
-        JobSeekerDto jobSeekerDto = jobSeekerService.updateJobSeeker(id, jobSeekerInputDto);
+    @PutMapping("/{email}")
+    public ResponseEntity<JobSeekerDto> updateJobSeeker(@PathVariable String email, @Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
+        JobSeekerDto jobSeekerDto = jobSeekerService.updateJobSeeker(email, jobSeekerInputDto);
 
         return ResponseEntity.ok().body(jobSeekerDto);
     }

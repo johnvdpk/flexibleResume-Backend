@@ -26,19 +26,14 @@ import java.util.List;
 public class User implements UserDetails {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "jobseeker_id") // Deze kolom zal in de 'users' tabel worden aangemaakt.
+    @JoinColumn(name = "jobseeker_id",referencedColumnName = "id") // Deze kolom zal in de 'users' tabel worden aangemaakt.
     private JobSeeker jobSeeker;
 
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    private String firstname;
-//    private String lastname;
-
-    // Alleen email en password is voldoende.
-
     private String email;
     private String password;
 

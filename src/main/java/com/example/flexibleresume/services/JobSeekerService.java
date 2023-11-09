@@ -114,31 +114,29 @@ public class JobSeekerService {
     }
 
 
-    public JobSeekerDto updateJobSeeker(Long id,JobSeekerInputDto jobSeekerInputDto) {
-        Optional<JobSeeker> jobSeeker = jobSeekerRepos.findById(id);
+    public JobSeekerDto updateJobSeeker(String email, JobSeekerInputDto jobSeekerInputDto) {
+        User user = userRepos.findByEmail(email).orElseThrow(() -> new RecordNotFoundException("User niet gevonden"));
+        JobSeeker existingJobSeeker = user.getJobSeeker();
 
-
-        if(jobSeeker.isPresent()) {
-            JobSeeker updateJobSeeker = new JobSeeker();
-
-            updateJobSeeker.setFirstName(jobSeekerInputDto.getFirstName());
-            updateJobSeeker.setSurName(jobSeekerInputDto.getSurName());
-            updateJobSeeker.setDateOfBirth(jobSeekerInputDto.getDateOfBirth());
-            updateJobSeeker.setEmail(jobSeekerInputDto.getEmail());
-            updateJobSeeker.setPhoneNumber(jobSeekerInputDto.getPhoneNumber());
-            updateJobSeeker.setHomeTown(jobSeekerInputDto.getHomeTown());
-            updateJobSeeker.setZipCode(jobSeekerInputDto.getZipCode());
-            updateJobSeeker.setHomeAddress(jobSeekerInputDto.getHomeAddress());
-            updateJobSeeker.setHouseNumber(jobSeekerInputDto.getHouseNumber());
-            JobSeeker updatedJobSeeker = jobSeekerRepos.save(updateJobSeeker);
-
-            return jobSeekerToDto(updatedJobSeeker);
-
-        } else {
-            throw new RecordNotFoundException("Geen persoon met gegeven id gevonden");
+        if(existingJobSeeker == null) {
+               throw new RecordNotFoundException("Geen JobSeeker gekoppeld aan deze user gevonden");
         }
+        // Update de velden van de bestaande jobseeker
+        existingJobSeeker.setFirstName(jobSeekerInputDto.getFirstName());
+        existingJobSeeker.setSurName(jobSeekerInputDto.getSurName());
+        existingJobSeeker.setDateOfBirth(jobSeekerInputDto.getDateOfBirth());
+        existingJobSeeker.setEmail(jobSeekerInputDto.getEmail());
+        existingJobSeeker.setPhoneNumber(jobSeekerInputDto.getPhoneNumber());
+        existingJobSeeker.setHomeTown(jobSeekerInputDto.getHomeTown());
+        existingJobSeeker.setZipCode(jobSeekerInputDto.getZipCode());
+        existingJobSeeker.setHomeAddress(jobSeekerInputDto.getHomeAddress());
+        existingJobSeeker.setHouseNumber(jobSeekerInputDto.getHouseNumber());
 
+        // Sla de bijgewerkte jobseeker op
+        JobSeeker updatedJobSeeker = jobSeekerRepos.save(existingJobSeeker);
 
+        // Zet om naar DTO en return
+        return jobSeekerToDto(updatedJobSeeker);
     }
 
     public void deleteJobSeeker(Long id) {
