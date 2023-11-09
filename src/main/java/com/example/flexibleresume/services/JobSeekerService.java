@@ -3,10 +3,13 @@ package com.example.flexibleresume.services;
 import com.example.flexibleresume.dtos.JobSeekerDto;
 import com.example.flexibleresume.dtos.JobSeekerInputDto;
 import com.example.flexibleresume.exceptions.RecordNotFoundException;
+import com.example.flexibleresume.models.CV;
 import com.example.flexibleresume.models.JobSeeker;
+import com.example.flexibleresume.repositorys.CVRepository;
 import com.example.flexibleresume.repositorys.JobSeekerRepository;
 import com.example.flexibleresume.repositorys.UserRepository;
 import com.example.flexibleresume.user.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,16 +17,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class JobSeekerService {
 
     private final JobSeekerRepository jobSeekerRepos;
     private final UserRepository userRepos;
-
-    public JobSeekerService(JobSeekerRepository jobSeekerRepos, UserRepository userRepos) {
-        this.jobSeekerRepos = jobSeekerRepos;
-        this.userRepos = userRepos;
-    }
-
+    private final CVRepository CVRepos;
 
 
     // JobSeeker naar JobSeekerDto. Database richting client.
@@ -61,6 +60,14 @@ public class JobSeekerService {
 
         return jobSeeker;
     }
+
+    public CV addCVToJobSeeker(Long jobSeekerId, CV cv) {
+        JobSeeker jobSeeker = jobSeekerRepos.findById(jobSeekerId)
+                .orElseThrow(() -> new RecordNotFoundException("JobSeeker niet gevonden"));
+        cv.setJobSeeker(jobSeeker);
+        return CVRepos.save(cv);
+    }
+
 
 
     // Alle Gets

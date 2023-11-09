@@ -6,6 +6,7 @@ import com.example.flexibleresume.models.JobSeeker;
 import com.example.flexibleresume.services.JobSeekerService;
 import com.example.flexibleresume.user.User;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +18,13 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/werkzoekende") // website is in het Nederlands
 public class JobSeekerController {
 
 
     private final JobSeekerService jobSeekerService;
 
-    public JobSeekerController(JobSeekerService jobSeekerService) {
-        this.jobSeekerService = jobSeekerService;
-    }
 
 
     @GetMapping("/all")
