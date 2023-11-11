@@ -14,7 +14,6 @@ public class PersonalInfoDto {
 
 
 
-    private long id;
     private String hobby;
     private String periodOfHobby;
     private String hobbyInfo;

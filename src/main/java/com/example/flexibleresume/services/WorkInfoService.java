@@ -1,18 +1,15 @@
 package com.example.flexibleresume.services;
 
-import com.example.flexibleresume.dtos.JobSeekerDto;
-import com.example.flexibleresume.dtos.JobSeekerInputDto;
 import com.example.flexibleresume.dtos.WorkInfoDto;
 import com.example.flexibleresume.dtos.WorkInfoInputDto;
 import com.example.flexibleresume.exceptions.RecordNotFoundException;
 import com.example.flexibleresume.models.CV;
-import com.example.flexibleresume.models.JobSeeker;
+
 import com.example.flexibleresume.models.WorkInfo;
 import com.example.flexibleresume.repositorys.CVRepository;
-import com.example.flexibleresume.repositorys.UserRepository;
+
 import com.example.flexibleresume.repositorys.WorkInfoRepository;
-import com.example.flexibleresume.user.User;
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

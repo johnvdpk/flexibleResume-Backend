@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class StudyInfoDto {
 
 
-    private long id;
     private String educationalInstitute;
     private String education;
     private String periodOfStudy;

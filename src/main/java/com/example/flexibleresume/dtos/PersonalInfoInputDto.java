@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class PersonalInfoInputDto {
 
 
-    private long id;
     private String hobby;
     private String periodOfHobby;
     private String hobbyInfo;
