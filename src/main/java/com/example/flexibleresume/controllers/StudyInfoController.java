@@ -25,6 +25,11 @@ public class StudyInfoController {
         return ResponseEntity.ok().body(studyInfos);
     }
 
+    @GetMapping("/{cvId}")
+    public ResponseEntity<List<StudyInfoDto>> getStudyInfoByCvId(@PathVariable Long cvId) {
+        List<StudyInfoDto> studyInfoDtos = studyInfoService.getStudyInfoByCvId(cvId);
+        return ResponseEntity.ok().body(studyInfoDtos);
+    }
     @PostMapping("/{cvId}")
     public ResponseEntity<StudyInfoDto> createStudyInfo(@PathVariable Long cvId,
                                                         @RequestBody StudyInfoInputDto studyInfoInputDto) {

@@ -64,6 +64,14 @@ public class WorkInfoService {
 
     }
 
+    public List<WorkInfoDto> getWorkInfoByCvId(Long cvId) {
+        List<WorkInfo> workInfos = workInfoRepos.findByCvId(cvId);
+        if (workInfos.isEmpty()) {
+            throw new RecordNotFoundException("Geen WorkInfo gevonden voor CV ID: " + cvId);
+        }
+        return workInfos.stream().map(this::workInfoToDto).collect(Collectors.toList());
+    }
+
 
     public WorkInfoDto createWorkInfo(WorkInfoInputDto workInfoInputDto, Long cvId) {
 

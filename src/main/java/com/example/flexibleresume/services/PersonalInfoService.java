@@ -43,6 +43,15 @@ public class PersonalInfoService {
                 .collect(Collectors.toList());
     }
 
+    public List<PersonalInfoDto> getPersonalInfoByCvId(Long cvId) {
+        List<PersonalInfo> personalInfos = personalInfoRepos.findByCvId(cvId);
+        if (personalInfos.isEmpty()) {
+            throw new RecordNotFoundException("Geen PersonalInfo gevonden voor CV ID: " + cvId);
+        }
+        return personalInfos.stream().map(this::personalInfoToDto).collect(Collectors.toList());
+    }
+
+
     public PersonalInfoDto createPersonalInfo(PersonalInfoInputDto personalInfoInputDto, Long cvId) {
         CV cv = cVRepos.findById(cvId)
                 .orElseThrow(() -> new RecordNotFoundException("CV niet gevonden met id: " + cvId));

@@ -34,10 +34,16 @@ public class WorkInfoController {
 
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<List<WorkInfoDto>> getWorkInfoById(@PathVariable Long id) {
         List<WorkInfoDto> workInfoDtos = workInfoService.getWorkInfoById(id);
 
+        return ResponseEntity.ok().body(workInfoDtos);
+    }
+
+    @GetMapping("{cvId}")
+    public ResponseEntity<List<WorkInfoDto>> getWorkInfoByCvId(@PathVariable Long cvId) {
+        List<WorkInfoDto> workInfoDtos = workInfoService.getWorkInfoByCvId(cvId);
         return ResponseEntity.ok().body(workInfoDtos);
     }
 

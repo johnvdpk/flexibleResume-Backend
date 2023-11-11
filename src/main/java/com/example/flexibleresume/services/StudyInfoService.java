@@ -45,6 +45,14 @@ public class StudyInfoService {
                 .collect(Collectors.toList());
     }
 
+    public List<StudyInfoDto> getStudyInfoByCvId(Long cvId) {
+        List<StudyInfo> studyInfos = studyInfoRepos.findByCvId(cvId);
+        if (studyInfos.isEmpty()) {
+            throw new RecordNotFoundException("Geen StudyInfo gevonden voor CV ID: " + cvId);
+        }
+        return studyInfos.stream().map(this::studyInfoToDto).collect(Collectors.toList());
+    }
+
     public StudyInfoDto createStudyInfo(StudyInfoInputDto studyInfoInputDto, Long cvId) {
         CV cv = cVRepos.findById(cvId)
                 .orElseThrow(() -> new RecordNotFoundException("CV niet gevonden met id: " + cvId));
