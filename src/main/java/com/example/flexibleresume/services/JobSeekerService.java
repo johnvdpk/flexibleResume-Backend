@@ -35,6 +35,7 @@ public class JobSeekerService {
     jobSeekerDto.setDateOfBirth(jobSeeker.getDateOfBirth());
     jobSeekerDto.setEmail(jobSeeker.getEmail());
     jobSeekerDto.setPhoneNumber(jobSeeker.getPhoneNumber());
+    jobSeekerDto.setResidence(jobSeekerDto.getResidence());
     jobSeekerDto.setZipCode(jobSeeker.getZipCode());
     jobSeekerDto.setHomeAddress(jobSeeker.getHomeAddress());
     jobSeekerDto.setHouseNumber(jobSeeker.getHouseNumber());
@@ -54,6 +55,7 @@ public class JobSeekerService {
         jobSeeker.setDateOfBirth(jobSeekerInputDto.getDateOfBirth());
         jobSeeker.setEmail(jobSeekerInputDto.getEmail());
         jobSeeker.setPhoneNumber(jobSeekerInputDto.getPhoneNumber());
+        jobSeeker.setResidence(jobSeekerInputDto.getResidence());
         jobSeeker.setZipCode(jobSeekerInputDto.getZipCode());
         jobSeeker.setHomeAddress(jobSeekerInputDto.getHomeAddress());
         jobSeeker.setHouseNumber(jobSeekerInputDto.getHouseNumber());
@@ -107,6 +109,18 @@ public class JobSeekerService {
         return jobSeekerDto;
     }
 
+    public JobSeekerDto getJobSeekerByEmail(String email) {
+        User user = userRepos.findByEmail(email)
+                .orElseThrow(() -> new RecordNotFoundException("User niet gevonden"));
+
+        JobSeeker jobSeeker = user.getJobSeeker();
+        if (jobSeeker == null) {
+            throw new RecordNotFoundException("Geen JobSeeker gekoppeld aan gebruiker");
+        }
+
+        return jobSeekerToDto(jobSeeker);
+    }
+
 
 
     // note to myself. InputDto wordt omgezet naar het model. En vervolgens wordt het weer terug gegegeven aan de dto
@@ -134,7 +148,7 @@ public class JobSeekerService {
         existingJobSeeker.setDateOfBirth(jobSeekerInputDto.getDateOfBirth());
         existingJobSeeker.setEmail(jobSeekerInputDto.getEmail());
         existingJobSeeker.setPhoneNumber(jobSeekerInputDto.getPhoneNumber());
-        existingJobSeeker.setHomeTown(jobSeekerInputDto.getHomeTown());
+        existingJobSeeker.setResidence(jobSeekerInputDto.getResidence());
         existingJobSeeker.setZipCode(jobSeekerInputDto.getZipCode());
         existingJobSeeker.setHomeAddress(jobSeekerInputDto.getHomeAddress());
         existingJobSeeker.setHouseNumber(jobSeekerInputDto.getHouseNumber());

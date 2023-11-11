@@ -18,7 +18,7 @@ public class JobSeekerDto {
     private LocalDate dateOfBirth;
     private String email;
     private String phoneNumber;
-    private String homeTown;
+    private String residence;
     private String zipCode;
     private String homeAddress;
     private String houseNumber;

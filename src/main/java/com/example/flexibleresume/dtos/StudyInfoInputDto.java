@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class StudyInfoInputDto {
 
-    private CV cv;
+
     private long id;
     private String educationalInstitute;
     private String education;

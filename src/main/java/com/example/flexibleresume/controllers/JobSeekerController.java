@@ -49,31 +49,25 @@ public class JobSeekerController {
         return ResponseEntity.ok(jobSeekerDto);
     }
 
-//    @PostMapping()
-//    public ResponseEntity<JobSeekerDto> addJobSeeker(@Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
-//        JobSeekerDto jobSeekerDto = jobSeekerService.addJobSeeker(jobSeekerInputDto);
-//
-//        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-//                .path("/{id}")
-//                .buildAndExpand(jobSeekerDto.getId())
-//                .toUri();
-//
-//        return ResponseEntity.created(location).body(jobSeekerDto);
-//    }
 
     @PostMapping
     public ResponseEntity<JobSeekerDto> addJobSeeker(@RequestBody JobSeekerInputDto jobSeekerInputDto)
-                                                     {
-
+    {
         JobSeekerDto jobSeekerDto = jobSeekerService.addJobSeeker(jobSeekerInputDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(jobSeekerDto);
     }
 
 
-
-    @PutMapping("/{email}")
+    @PutMapping("/email/{email}")
     public ResponseEntity<JobSeekerDto> updateJobSeeker(@PathVariable String email, @Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
         JobSeekerDto jobSeekerDto = jobSeekerService.updateJobSeeker(email, jobSeekerInputDto);
+
+        return ResponseEntity.ok().body(jobSeekerDto);
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<JobSeekerDto> getJobSeekerByEmail(@PathVariable String email) {
+        JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerByEmail(email);
 
         return ResponseEntity.ok().body(jobSeekerDto);
     }

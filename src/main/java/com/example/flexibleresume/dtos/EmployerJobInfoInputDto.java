@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 public class EmployerJobInfoInputDto {
 
 
-    private Long id;
-    private Employer employer;
+
     private String jobDescription;
     private String jobRequirements;
     private String skill;

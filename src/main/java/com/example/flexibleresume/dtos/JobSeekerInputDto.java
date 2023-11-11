@@ -14,21 +14,13 @@ public class JobSeekerInputDto {
 
 
     private String firstName;
-    @NotBlank
     private String surName;
-    @NotBlank
     private LocalDate dateOfBirth;
-    @NotBlank
     private String email;
-    @NotBlank
     private String phoneNumber;
-    @NotBlank
-    private String homeTown;
-    @NotBlank
+    private String residence;
     private String zipCode;
-    @NotBlank
     private String homeAddress;
-    @NotBlank
     private String houseNumber;
 
 

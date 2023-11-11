@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EmployerDto {
 
-    private Long id;
+
     private String company;
     private String industry;
     private String officeAdress;

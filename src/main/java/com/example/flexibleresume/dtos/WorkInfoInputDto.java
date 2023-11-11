@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class WorkInfoInputDto {
 
-    private CV cv;
-    private Long id;
+
+    private Long cvId;
     private String company;
     private String jobTitle;
     private String periodOfEmployment;

@@ -14,8 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EmployerJobInfoDto {
 
-    private Long id;
-    private Employer employer;
+
     private String jobDescription;
     private String jobRequirements;
     private String skill;

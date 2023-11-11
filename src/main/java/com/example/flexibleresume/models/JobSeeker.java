@@ -44,8 +44,8 @@ public class JobSeeker {
     private String email;
     @Column(name = "phone_numbers", length = 20)
     private String phoneNumber;
-    @Column(name = "home_towns", length = 30)
-    private String homeTown;
+    @Column(name = "residences", length = 30)
+    private String residence;
     @Column(name = "zipcodes", length = 6)
     private String zipCode;
     @Column(name = "home_addresses", length = 100)

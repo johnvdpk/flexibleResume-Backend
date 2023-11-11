@@ -20,6 +20,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    //wordt niet gebruikt en is wellicht ook niet nodig omdat dit al bij AuthenticationController gebeurd
     public UserDto createUser(UserInputDto userInputDto) {
         // Aanmaken van een nieuwe User
         User user = new User();
