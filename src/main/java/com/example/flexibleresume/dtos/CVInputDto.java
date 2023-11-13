@@ -13,8 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CVInputDto {
 
-    private String aboutme;
-    private JobSeeker jobSeeker;
+    private String aboutMe;
     private List workInfos;
     private List personalInfos;
     private List studyInfos;

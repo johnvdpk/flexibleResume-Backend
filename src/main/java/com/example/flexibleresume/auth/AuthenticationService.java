@@ -9,10 +9,9 @@ import com.example.flexibleresume.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import java.util.Optional;
 
 
 @Service
@@ -32,6 +31,12 @@ public class AuthenticationService {
     private final EmployerJobInfoRepository employerJobInfoRepos;
 
     public AuthenticationResponse register(RegisterRequest request) {
+
+        Optional<User> existingUser = userRepos.findByEmail(request.getEmail());
+        if (existingUser.isPresent()) {
+            throw new RuntimeException("Een gebruiker met dit e-mailadres bestaat al");
+        }
+
 
         //maakt de user aan
         var user = User.builder()
@@ -105,4 +110,14 @@ public class AuthenticationService {
                 .cvId(cvId)
                 .build();
     }
+
+    public void deleteUserByEmail(String email) {
+
+        User userToDelete = userRepos.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Gebruiker met e-mailadres " + email + " niet gevonden"));
+
+            userRepos.delete(userToDelete);
+
+    }
+
 }

@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PersonalInfoInputDto {
 
-
+    private Long cvId;
+    private Long id;
     private String hobby;
     private String periodOfHobby;
     private String hobbyInfo;

@@ -26,14 +26,11 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
-//    @PostMapping("/authenticate")
-//    public ResponseEntity<AuthenticationResponse> register(
-//            @RequestBody AuthenticationRequest request
-//    ) {
-//        return ResponseEntity.ok(authenticationService.authenticate(request));
-//    }
-
-
+    @DeleteMapping("/user/{email}")
+    public ResponseEntity<?> deleteUserByEmail(@PathVariable String email) {
+        authenticationService.deleteUserByEmail(email);
+        return ResponseEntity.ok().build();
+    }
 
 
 

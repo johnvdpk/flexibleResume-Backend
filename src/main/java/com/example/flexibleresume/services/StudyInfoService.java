@@ -23,15 +23,23 @@ public class StudyInfoService {
 
     public StudyInfoDto studyInfoToDto(StudyInfo studyInfo) {
         StudyInfoDto studyInfoDto = new StudyInfoDto();
+
+        studyInfoDto.setId(studyInfo.getId());
         studyInfoDto.setEducationalInstitute(studyInfo.getEducationalInstitute());
         studyInfoDto.setEducation(studyInfo.getEducation());
         studyInfoDto.setPeriodOfStudy(studyInfo.getPeriodOfStudy());
         studyInfoDto.setStudyInfo(studyInfo.getStudyInfo());
+
+        if (studyInfo.getCv() != null) {
+            studyInfoDto.setCvId(studyInfo.getCv().getId());
+        }
+
         return studyInfoDto;
     }
 
     public StudyInfo inputDtoToStudyInfo(StudyInfoInputDto studyInfoInputDto) {
         StudyInfo studyInfo = new StudyInfo();
+
         studyInfo.setEducationalInstitute(studyInfoInputDto.getEducationalInstitute());
         studyInfo.setEducation(studyInfoInputDto.getEducation());
         studyInfo.setPeriodOfStudy(studyInfoInputDto.getPeriodOfStudy());

@@ -24,7 +24,7 @@ public class PersonalInfoController {
         return ResponseEntity.ok().body(personalInfoDtos);
     }
 
-    @GetMapping("{cvId}")
+    @GetMapping("/{cvId}")
     public ResponseEntity<List<PersonalInfoDto>> getPersonalInfoByCvId(@PathVariable Long cvId) {
         List<PersonalInfoDto> personalInfoDtos = personalInfoService.getPersonalInfoByCvId(cvId);
         return ResponseEntity.ok().body(personalInfoDtos);

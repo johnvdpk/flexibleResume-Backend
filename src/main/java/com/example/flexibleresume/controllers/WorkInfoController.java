@@ -41,7 +41,7 @@ public class WorkInfoController {
         return ResponseEntity.ok().body(workInfoDtos);
     }
 
-    @GetMapping("{cvId}")
+    @GetMapping("/{cvId}")
     public ResponseEntity<List<WorkInfoDto>> getWorkInfoByCvId(@PathVariable Long cvId) {
         List<WorkInfoDto> workInfoDtos = workInfoService.getWorkInfoByCvId(cvId);
         return ResponseEntity.ok().body(workInfoDtos);

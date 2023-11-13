@@ -24,7 +24,7 @@ public class CV {
     private Long id;
 
     @Column(name = "about_me", length = 500)
-    private String aboutme;
+    private String aboutMe;
 
 
     // CV is gekoppeld aan de Jobseeker. De JobSeeker mag meerdere CV's hebben.

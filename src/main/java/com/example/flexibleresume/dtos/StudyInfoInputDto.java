@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class StudyInfoInputDto {
 
-
+    private Long cvId;
+    private Long id;
     private String educationalInstitute;
     private String education;
     private String periodOfStudy;

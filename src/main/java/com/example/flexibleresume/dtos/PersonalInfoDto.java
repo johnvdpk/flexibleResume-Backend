@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 public class PersonalInfoDto {
 
 
-
+    private Long cvId;
+    private Long id;
     private String hobby;
     private String periodOfHobby;
     private String hobbyInfo;

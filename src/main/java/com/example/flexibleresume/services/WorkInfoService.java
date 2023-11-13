@@ -28,6 +28,7 @@ public class WorkInfoService {
     public WorkInfoDto workInfoToDto(WorkInfo workInfo) {
         var workInfoDto = new WorkInfoDto();
 
+        workInfoDto.setId(workInfo.getId());
         workInfoDto.setCompany(workInfo.getCompany());
         workInfoDto.setJobTitle(workInfo.getJobTitle());
         workInfoDto.setPeriodOfEmployment(workInfo.getPeriodOfEmployment());

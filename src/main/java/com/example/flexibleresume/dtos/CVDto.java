@@ -15,8 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CVDto {
 
-    private String aboutme;
-    private JobSeeker jobSeeker;
+    private String aboutMe;
     private List workInfos;
     private List personalInfos;
     private List studyInfos;

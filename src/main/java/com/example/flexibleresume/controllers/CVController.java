@@ -2,9 +2,12 @@ package com.example.flexibleresume.controllers;
 
 
 import com.example.flexibleresume.dtos.CVDto;
+import com.example.flexibleresume.dtos.CVInputDto;
+import com.example.flexibleresume.exceptions.RecordNotFoundException;
 import com.example.flexibleresume.models.CV;
 import com.example.flexibleresume.services.CVService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +37,12 @@ public class CVController {
         return ResponseEntity.ok(cVDto);
     }
 
+    @PutMapping("/cv/{cvId}")
+    public ResponseEntity<CVDto> updateCV(@PathVariable Long cvId, @RequestBody CVInputDto cvInputDto) {
+        CVDto updatedCV = cVService.updateCV(cvId, cvInputDto);
+        return ResponseEntity.ok(updatedCV);
+    }
 
 
 }
+

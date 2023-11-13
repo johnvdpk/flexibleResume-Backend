@@ -18,7 +18,7 @@ public class PersonalInfo {
     private CV cv;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name="hobbys")

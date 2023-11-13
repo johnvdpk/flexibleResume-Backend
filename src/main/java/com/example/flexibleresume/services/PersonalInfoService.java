@@ -23,14 +23,23 @@ public class PersonalInfoService {
 
     public PersonalInfoDto personalInfoToDto(PersonalInfo personalInfo) {
         PersonalInfoDto personalInfoDto = new PersonalInfoDto();
+
+        personalInfoDto.setId(personalInfo.getId());
         personalInfoDto.setHobby(personalInfo.getHobby());
         personalInfoDto.setPeriodOfHobby(personalInfo.getPeriodOfHobby());
         personalInfoDto.setHobbyInfo(personalInfo.getHobbyInfo());
+
+        if(personalInfo.getCv() != null) {
+            personalInfoDto.setCvId(personalInfo.getCv().getId());
+        }
+
         return personalInfoDto;
     }
 
     public PersonalInfo inputDtoToPersonalInfo(PersonalInfoInputDto personalInfoInputDto) {
         PersonalInfo personalInfo = new PersonalInfo();
+
+
         personalInfo.setHobby(personalInfoInputDto.getHobby());
         personalInfo.setPeriodOfHobby(personalInfoInputDto.getPeriodOfHobby());
         personalInfo.setHobbyInfo(personalInfoInputDto.getHobbyInfo());
@@ -53,12 +62,15 @@ public class PersonalInfoService {
 
 
     public PersonalInfoDto createPersonalInfo(PersonalInfoInputDto personalInfoInputDto, Long cvId) {
+
         CV cv = cVRepos.findById(cvId)
                 .orElseThrow(() -> new RecordNotFoundException("CV niet gevonden met id: " + cvId));
 
         PersonalInfo personalInfo = inputDtoToPersonalInfo(personalInfoInputDto);
+
         personalInfo.setCv(cv);
         personalInfo = personalInfoRepos.save(personalInfo);
+
         return personalInfoToDto(personalInfo);
     }
 
