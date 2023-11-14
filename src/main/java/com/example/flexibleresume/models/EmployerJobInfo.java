@@ -17,8 +17,6 @@ public class EmployerJobInfo {
     @GeneratedValue
     private Long id;
 
-    //    bedrijf / company ←- koppelen met employer ? onetomany
-    //    Branch / industry ... zelfde als hierovern.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Employer_id")
     private Employer employer;

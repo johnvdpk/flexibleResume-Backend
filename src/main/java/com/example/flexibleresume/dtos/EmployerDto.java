@@ -11,10 +11,9 @@ import lombok.NoArgsConstructor;
 public class EmployerDto {
 
 
-    private String company;
     private String industry;
     private String officeAdress;
-    private String getOfficeAdressNumber;
+    private String OfficeAdressNumber;
     private String officeZipcode;
     private String officeCityLocation;
     private String kvk;

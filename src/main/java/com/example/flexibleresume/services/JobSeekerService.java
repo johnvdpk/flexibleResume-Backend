@@ -35,7 +35,7 @@ public class JobSeekerService {
     jobSeekerDto.setDateOfBirth(jobSeeker.getDateOfBirth());
     jobSeekerDto.setEmail(jobSeeker.getEmail());
     jobSeekerDto.setPhoneNumber(jobSeeker.getPhoneNumber());
-    jobSeekerDto.setResidence(jobSeekerDto.getResidence());
+    jobSeekerDto.setResidence(jobSeeker.getResidence());
     jobSeekerDto.setZipCode(jobSeeker.getZipCode());
     jobSeekerDto.setHomeAddress(jobSeeker.getHomeAddress());
     jobSeekerDto.setHouseNumber(jobSeeker.getHouseNumber());

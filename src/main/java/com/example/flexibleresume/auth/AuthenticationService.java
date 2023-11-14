@@ -75,9 +75,17 @@ public class AuthenticationService {
         workInfo.setCv(cv);
         workRepos.save(workInfo);
 
+        // Maakt een Employer aan als je inlogt met COMPANY
+        Employer employer = new Employer();
+        employer.setUser(user); // Koppel de User aan de Employer
+        employerRepos.save(employer);
+
+        user.setEmployer(employer);
+        user = userRepos.save(user);
 
 
-        var jwtToken = jwtService.generateToken(user);
+
+        var jwtToken = jwtService.generateToken(user, cv.getId());
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .cvId(cv.getId())
@@ -96,14 +104,16 @@ public class AuthenticationService {
         var user = userRepos.findByEmail(request.getEmail())
                 .orElseThrow();
 
-        var jwtToken = jwtService.generateToken(user);
-
         // Vind de JobSeeker en het bijbehorende eerste CV
         JobSeeker jobSeeker = user.getJobSeeker();
         Long cvId = null;
         if (jobSeeker != null && !jobSeeker.getCvs().isEmpty()) {
             cvId = jobSeeker.getCvs().get(0).getId(); // Neem het eerste CV
         }
+
+
+        var jwtToken = jwtService.generateToken(user, cvId);
+
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)

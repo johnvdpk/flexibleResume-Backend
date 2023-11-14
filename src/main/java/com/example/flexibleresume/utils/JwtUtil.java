@@ -1,6 +1,5 @@
 package com.example.flexibleresume.utils;
-
-
+import com.example.flexibleresume.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -48,6 +47,9 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
+
+
+    // Wordt niet bebruikt. Hier is JwtService voor. Wat mij realiseert dat ik dubbele code heb. om niet teveel kaport te maken laat ik het zo staan.
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userDetails.getUsername());

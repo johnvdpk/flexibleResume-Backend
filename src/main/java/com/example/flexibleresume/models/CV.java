@@ -23,12 +23,16 @@ public class CV {
     @GeneratedValue
     private Long id;
 
+    @Lob
+    private byte[] docFile;
+    private String fileName;
     @Column(name = "about_me", length = 500)
     private String aboutMe;
 
 
+
     // CV is gekoppeld aan de Jobseeker. De JobSeeker mag meerdere CV's hebben.
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "jobseeker_id")
     private JobSeeker jobSeeker;
 

@@ -3,18 +3,19 @@ package com.example.flexibleresume.services;
 
 import com.example.flexibleresume.dtos.CVDto;
 import com.example.flexibleresume.dtos.CVInputDto;
-import com.example.flexibleresume.dtos.CVDto;
-import com.example.flexibleresume.dtos.JobSeekerInputDto;
 import com.example.flexibleresume.exceptions.RecordNotFoundException;
 import com.example.flexibleresume.models.CV;
-import com.example.flexibleresume.models.JobSeeker;
 import com.example.flexibleresume.repositorys.CVRepository;
 import com.example.flexibleresume.repositorys.JobSeekerRepository;
-import com.example.flexibleresume.user.User;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -83,6 +84,30 @@ public class CVService {
 
 
         return cVDto;
+    }
+
+    public CV uploadFileDocument(MultipartFile file) throws IOException {
+        String name = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        CV cv = new CV();
+        cv.setFileName(name);
+        cv.setDocFile(file.getBytes());
+
+        cVRepos.save(cv);
+
+        return cv;
+
+    }
+
+
+
+    public CV singleFileDownload(String fileName, HttpServletRequest request){
+
+        CV cv = cVRepos.findByFileName(fileName);
+
+        String mimeType = request.getServletContext().getMimeType(cv.getFileName());
+
+        return cv;
+
     }
 
 

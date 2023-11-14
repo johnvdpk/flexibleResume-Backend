@@ -1,6 +1,7 @@
 package com.example.flexibleresume.user;
 
 
+import com.example.flexibleresume.models.Employer;
 import com.example.flexibleresume.models.JobSeeker;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import jakarta.persistence.*;
@@ -29,7 +30,9 @@ public class User implements UserDetails {
     @JoinColumn(name = "jobseeker_id",referencedColumnName = "id") // Deze kolom zal in de 'users' tabel worden aangemaakt.
     private JobSeeker jobSeeker;
 
-
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "Employer_id",referencedColumnName = "id") // Deze kolom zal in de 'users' tabel worden aangemaakt.
+    private Employer employer ;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

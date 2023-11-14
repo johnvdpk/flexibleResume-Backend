@@ -1,5 +1,6 @@
 package com.example.flexibleresume.models;
 
+import com.example.flexibleresume.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +19,8 @@ public class Employer {
     @OneToMany(mappedBy = "employer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EmployerJobInfo> jobInfos = new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "employer")
+    private User user;
 
     @Id
     @GeneratedValue
@@ -33,7 +36,7 @@ public class Employer {
     private String officeAdress;
 
     @Column(name="office_adress_numbers")
-    private String getOfficeAdressNumber;
+    private String OfficeAdressNumber;
 
     @Column(name="office_zipcode")
     private String officeZipcode;
