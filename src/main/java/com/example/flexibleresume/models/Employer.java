@@ -36,7 +36,7 @@ public class Employer {
     private String officeAdress;
 
     @Column(name="office_adress_numbers")
-    private String OfficeAdressNumber;
+    private String officeAdressNumber;
 
     @Column(name="office_zipcode")
     private String officeZipcode;

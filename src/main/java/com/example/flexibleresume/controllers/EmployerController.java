@@ -4,6 +4,7 @@ import com.example.flexibleresume.dtos.EmployerDto;
 import com.example.flexibleresume.dtos.EmployerInputDto;
 import com.example.flexibleresume.dtos.JobSeekerDto;
 import com.example.flexibleresume.services.EmployerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,9 +40,10 @@ public class EmployerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newEmployer);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<EmployerDto> updateEmployer(@PathVariable Long id, @RequestBody EmployerInputDto employerInputDto) {
-        EmployerDto updatedEmployer = employerService.updateEmployer(id, employerInputDto);
+    @PutMapping("/email/{email}")
+    public ResponseEntity<EmployerDto> updateEmployer(@PathVariable String email, @Valid @RequestBody EmployerInputDto employerInputDto) {
+        EmployerDto updatedEmployer = employerService.updateEmployer(email, employerInputDto);
+
         return ResponseEntity.ok(updatedEmployer);
     }
 

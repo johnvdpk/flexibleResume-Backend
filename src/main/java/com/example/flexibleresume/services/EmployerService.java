@@ -3,6 +3,7 @@ package com.example.flexibleresume.services;
 import com.example.flexibleresume.dtos.EmployerDto;
 import com.example.flexibleresume.dtos.EmployerInputDto;
 import com.example.flexibleresume.dtos.JobSeekerDto;
+import com.example.flexibleresume.dtos.JobSeekerInputDto;
 import com.example.flexibleresume.exceptions.RecordNotFoundException;
 import com.example.flexibleresume.models.Employer;
 import com.example.flexibleresume.models.JobSeeker;
@@ -25,6 +26,7 @@ public class EmployerService {
     // Omzetten van Employer naar EmployerDto
     private EmployerDto employerToDto(Employer employer) {
         return new EmployerDto(
+                employer.getCompany(),
                 employer.getIndustry(),
                 employer.getOfficeAdress(),
                 employer.getOfficeAdressNumber(),
@@ -41,6 +43,8 @@ public class EmployerService {
     private Employer inputDtoToEmployer(EmployerInputDto dto) {
         Employer employer = new Employer();
         // Set alle velden van Employer
+
+        employer.setCompany(dto.getCompany());
         employer.setIndustry(dto.getIndustry());
         employer.setOfficeAdress(dto.getOfficeAdress());
         employer.setOfficeAdressNumber(dto.getOfficeAdressNumber());
@@ -61,17 +65,32 @@ public class EmployerService {
         return employerToDto(employer);
     }
 
-    // Bijwerken van een bestaande Employer
-    public EmployerDto updateEmployer(Long id, EmployerInputDto dto) {
-        Employer employer = employerRepos.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException("Employer niet gevonden met id: " + id));
 
-        // Update de velden van de bestaande employer
-        // ... (set alle velden van employer op basis van dto)
+    public EmployerDto updateEmployer(String email, EmployerInputDto employerInputDto) {
+        User user = userRepos.findByEmail(email).orElseThrow(() -> new RecordNotFoundException("User niet gevonden"));
+        Employer existingEmployer = user.getEmployer();
 
-        employer = employerRepos.save(employer);
-        return employerToDto(employer);
+        if(existingEmployer == null) {
+            throw new RecordNotFoundException("Geen Employer gekoppeld aan deze user gevonden");
+        }
+        existingEmployer.setCompany(employerInputDto.getCompany());
+        existingEmployer.setIndustry(employerInputDto.getIndustry());
+        existingEmployer.setOfficeAdress(employerInputDto.getOfficeAdress());
+        existingEmployer.setOfficeAdressNumber(employerInputDto.getOfficeAdressNumber());
+        existingEmployer.setOfficeZipcode(employerInputDto.getOfficeZipcode());
+        existingEmployer.setOfficeCityLocation(employerInputDto.getOfficeCityLocation());
+        existingEmployer.setKvk(employerInputDto.getKvk());
+        existingEmployer.setMission(employerInputDto.getMission());
+        existingEmployer.setVision(employerInputDto.getVision());
+        existingEmployer.setNumberOfEmployees(employerInputDto.getNumberOfEmployees());
+
+
+        Employer updatedEmployer = employerRepos.save(existingEmployer);
+
+
+        return employerToDto(updatedEmployer);
     }
+
 
     // Ophalen van een Employer op basis van ID
     public EmployerDto getEmployerById(Long id) {
