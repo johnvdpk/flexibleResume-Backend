@@ -76,16 +76,22 @@ class JobSeekerServiceTest {
 
     }
 
+
+
     @Test
     void getAllJobSeekers() {
         Long id = 1L;
         Optional<JobSeeker> jobSeekerOptional = Optional.of(jobSeeker);
         when(jobSeekerRepository.findById(id)).thenReturn(jobSeekerOptional);
 
-        List<JobSeeker> result = jobSeekerService.getAllJobSeekers(Optional.of(id));
+        JobSeekerDto jobSeekerDto = new JobSeekerDto(); // Maak een dummy JobSeekerDto object
+        // Stel eventueel velden van jobSeekerDto in die overeenkomen met jobSeeker
+        when(jobSeekerService.jobSeekerToDto(jobSeeker)).thenReturn(jobSeekerDto);
+
+        List<JobSeekerDto> result = jobSeekerService.getAllJobSeekers(id);
 
         assertEquals(1, result.size());
-        assertEquals(jobSeeker, result.get(0));
+        assertEquals(jobSeekerDto, result.get(0)); // Controleer of de resultaten JobSeekerDto objecten zijn
     }
 
     @Test

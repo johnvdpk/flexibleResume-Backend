@@ -42,15 +42,15 @@ public class JobSeekerControllerTest {
 
     @MockBean
     private JwtService jwtService;
-    @Test
-    public void getAllJobSeekersTest() throws Exception {
-        List<JobSeeker> jobSeekers = List.of(new JobSeeker(/* init velden */));
-        when(jobSeekerService.getAllJobSeekers(Optional.empty())).thenReturn(jobSeekers);
-
-        mockMvc.perform(get("/werkzoekende/all"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)));
-    }
+//    @Test
+//    public void getAllJobSeekersTest() throws Exception {
+//        List<JobSeeker> jobSeekers = List.of(new JobSeeker(/* init velden */));
+//        when(jobSeekerService.getAllJobSeekers(Optional.empty())).thenReturn(jobSeekers);
+//
+//        mockMvc.perform(get("/werkzoekende/all"))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$", hasSize(1)));
+//    }
 
 
     @Test

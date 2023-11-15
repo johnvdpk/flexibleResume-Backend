@@ -75,14 +75,27 @@ public class JobSeekerService {
     // Alle Gets
 
 
-    public List<JobSeeker> getAllJobSeekers(Optional<Long> id) {
-        if (id.isPresent()) {
-            Optional<JobSeeker> jobSeekerOptional = jobSeekerRepos.findById(id.get());
-            return List.of(jobSeekerOptional.get());
+    public List<JobSeekerDto> getAllJobSeekers() {
+        List<JobSeeker> jobseekerList = jobSeekerRepos.findAll();
+        List<JobSeekerDto> jobseekerDtoList = new ArrayList<>();
+
+        for (JobSeeker jobseeker : jobseekerList) {
+            JobSeekerDto dto = jobSeekerToDto(jobseeker);
+            jobseekerDtoList.add(dto);
         }
-        return jobSeekerRepos.findAll();
+        return jobseekerDtoList;
 
+    }
 
+    public List<JobSeekerDto> getAllJobSeekersBySurName(String surName) {
+        List<JobSeeker> jobSeekerList = jobSeekerRepos.findAllJobSeekersBySurName(surName);
+        List<JobSeekerDto> jobSeekerDtoList = new ArrayList<>();
+
+        for(JobSeeker jobSeeker : jobSeekerList) {
+            JobSeekerDto dto = jobSeekerToDto(jobSeeker);
+            jobSeekerDtoList.add(dto);
+        }
+        return jobSeekerDtoList;
     }
 
     public JobSeekerDto getJobSeekerByFirstName(String firstName) {

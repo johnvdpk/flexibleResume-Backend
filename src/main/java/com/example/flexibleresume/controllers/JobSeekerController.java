@@ -2,6 +2,7 @@ package com.example.flexibleresume.controllers;
 
 import com.example.flexibleresume.dtos.JobSeekerDto;
 import com.example.flexibleresume.dtos.JobSeekerInputDto;
+import com.example.flexibleresume.exceptions.RecordNotFoundException;
 import com.example.flexibleresume.models.JobSeeker;
 import com.example.flexibleresume.services.JobSeekerService;
 import com.example.flexibleresume.user.User;
@@ -26,13 +27,24 @@ public class JobSeekerController {
 
 
 
-    @GetMapping("/all")
-    public ResponseEntity<List<JobSeeker>>getAllJobSeekers(@RequestParam(value = "id", required = false)Optional<Long> id) {
-        List<JobSeeker> jobSeekers = jobSeekerService.getAllJobSeekers(id);
+    @GetMapping("/naam")
+    public ResponseEntity<List<JobSeekerDto>> getAllJobSeekers(@RequestParam(value = "surName", required = false) Optional<String> surName) {
 
-    return ResponseEntity.ok().body(jobSeekers);
+        List<JobSeekerDto> jobSeekerDtos;
+
+        if (surName.isEmpty()){
+
+            jobSeekerDtos = jobSeekerService.getAllJobSeekers();
+
+        } else {
+            jobSeekerDtos = jobSeekerService.getAllJobSeekersBySurName(surName.get());
+
+        }
+
+        return ResponseEntity.ok().body(jobSeekerDtos);
 
     }
+
 
     @GetMapping("/voornaam/{firstName}")
     public ResponseEntity<JobSeekerDto> getJobSeekerByFirstName(@PathVariable String firstName) {

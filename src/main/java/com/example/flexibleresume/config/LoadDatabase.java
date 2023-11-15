@@ -76,7 +76,8 @@ public class LoadDatabase {
             CV cv = new CV();
             cv.setAboutMe("Gepassioneerde developer met ervaring in Java en Spring Framework.");
             cv.setJobSeeker(jobSeeker); // Koppel aan JobSeeker
-            cVRepos.save(cv);
+            CV savedCV = cVRepos.save(cv);
+            Long cvId = savedCV.getId();
 
 
             // Werkervaring toevoegen
