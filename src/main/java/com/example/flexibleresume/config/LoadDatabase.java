@@ -26,11 +26,19 @@ public class LoadDatabase {
                                    EmployerRepository employerRepos,
                                    PasswordEncoder passwordEncoder) {
         return args -> {
+
+            JobSeeker jobSeeker = new JobSeeker();
+
+
+
+
+
             // Maak en sla een User op
             User user = User.builder()
                     .email("johndoe@email.com")
                     .password(passwordEncoder.encode("1234"))
                     .role(Role.USER)
+                    .jobSeeker(jobSeeker)
                     .build();
             userRepos.save(user);
 
@@ -49,8 +57,7 @@ public class LoadDatabase {
             userRepos.save(adminUser);
 
 
-            // Maak en sla een JobSeeker op
-            JobSeeker jobSeeker = new JobSeeker();
+
             jobSeeker.setFirstName("John");
             jobSeeker.setSurName("Doe");
             jobSeeker.setDateOfBirth(LocalDate.parse("1986-05-04"));
@@ -62,6 +69,8 @@ public class LoadDatabase {
             jobSeeker.setHouseNumber("54b");
             jobSeeker.setUser(user); // Koppel aan de User
             jobSeekerRepos.save(jobSeeker);
+
+
 
             // Maak en sla een CV op
             CV cv = new CV();
