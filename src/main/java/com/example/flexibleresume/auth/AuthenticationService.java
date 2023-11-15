@@ -60,20 +60,20 @@ public class AuthenticationService {
         cv.setJobSeeker(jobSeeker);
         cVRepos.save(cv);
 
-        // Maakt een PersonalInfo aan voor het CV
-        PersonalInfo personalInfo = new PersonalInfo();
-        personalInfo.setCv(cv);
-        personalInfoRepos.save(personalInfo);
-
-        // Maakt een StudyInfo aan voor het CV
-        StudyInfo studyInfo = new StudyInfo();
-        studyInfo.setCv(cv);
-        studyInfoRepos.save(studyInfo);
-
-        // Maakt een WorkInfo aan voor het CV
-        WorkInfo workInfo = new WorkInfo();
-        workInfo.setCv(cv);
-        workRepos.save(workInfo);
+//        // Maakt een PersonalInfo aan voor het CV
+//        PersonalInfo personalInfo = new PersonalInfo();
+//        personalInfo.setCv(cv);
+//        personalInfoRepos.save(personalInfo);
+//
+//        // Maakt een StudyInfo aan voor het CV
+//        StudyInfo studyInfo = new StudyInfo();
+//        studyInfo.setCv(cv);
+//        studyInfoRepos.save(studyInfo);
+//
+//        // Maakt een WorkInfo aan voor het CV
+//        WorkInfo workInfo = new WorkInfo();
+//        workInfo.setCv(cv);
+//        workRepos.save(workInfo);
 
         // Maakt een Employer aan als je inlogt met COMPANY
         Employer employer = new Employer();

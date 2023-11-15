@@ -29,20 +29,6 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    // oude variant
-//    public String generateToken(UserDetails userDetails) {
-//        return generateToken(new HashMap<>(), userDetails);
-//    }
-
-
-//    public String generateToken(User user) {
-//        Map<String, Object> claims = new HashMap<>();
-//        claims.put("role", user.getRole().name()); // Voeg de rol van de gebruiker toe aan de claims
-//
-//
-//        return generateToken(claims, user.getUsername());
-//    }
-
     public String generateToken(User user, Long cvId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", user.getRole().name()); // Voeg de rol van de gebruiker toe aan de claims
@@ -64,22 +50,6 @@ public class JwtService {
     }
 
 
-//    public String generateToken(User user) {
-//        Map<String, Object> claims = new HashMap<>();
-//        claims.put("role", user.getRole().name()); // Voeg de rol van de gebruiker toe aan de claims
-//        return generateToken(claims, user.getUsername());
-//    }
-//
-//    ) {
-//        return Jwts
-//                .builder()
-//                .setClaims(extraClaims)
-//                .setSubject(userDetails.getUsername())
-//                .setIssuedAt(new Date(System.currentTimeMillis()))
-//                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24 * 10)) // 10 dagen
-//                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
-//                .compact();
-//    }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
