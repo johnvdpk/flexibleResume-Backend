@@ -31,25 +31,25 @@ public class SecurityConfiguration {
 
          .requestMatchers("/**").permitAll()
 
-                 .requestMatchers("/auth/**").permitAll()
+                 .requestMatchers("/auth/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                .requestMatchers(HttpMethod.POST,"/auth/authenticate").permitAll()
-                .requestMatchers("/werkzoekende/**").hasAnyRole("ROLE_USER", "ROLE_ADMIN")
-                .requestMatchers(HttpMethod.GET,"/werkzoekende/**").hasAnyRole("USER","ADMIN")
-                                .requestMatchers(HttpMethod.POST,"/werkzoekende/**").hasAnyRole("USER","ADMIN")
-                                .requestMatchers(HttpMethod.PUT,"/werkzoekende/**").hasAnyRole("USER","ADMIN")
+                .requestMatchers(HttpMethod.POST,"/auth/authenticate").hasAnyRole("USER","ADMIN")
 
-                                .requestMatchers("/bedrijf/**").hasAnyRole("COMPANY", "ADMIN")
-//                .requestMatchers("/authenticated").authenticated()
-//                .requestMatchers("/authenticate").permitAll()
+                .requestMatchers(HttpMethod.POST, "/werkzoekende/**").hasAnyRole("USER","ADMIN")
+                .requestMatchers(HttpMethod.GET,"/werkzoekende/**").hasAnyRole("USER","ADMIN")
+                .requestMatchers(HttpMethod.POST,"/werkzoekende/**").hasAnyRole("USER","ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/werkzoekende/**").hasAnyRole("USER","ADMIN")
+                .requestMatchers("/werkzoekende/**").hasAnyRole("USER","ADMIN")
+                .requestMatchers(HttpMethod.POST, "/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
+                .requestMatchers(HttpMethod.GET,"/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
+                .requestMatchers(HttpMethod.POST,"/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
+                .requestMatchers("/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
+
                 .anyRequest().authenticated()
 
                 )
 
-                // amicode
-//
-//                .anyRequest().authenticated() // hier moet je ingelogd zijn.
-//                .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
