@@ -50,38 +50,45 @@ public class CVController {
         return ResponseEntity.ok(updatedCV);
     }
 
+
     @PostMapping("/upload")
-    public FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
-
-
-        CV cv = cVService.uploadFileDocument(file);
-        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/werkzoekende/cv/download/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
+    public FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("cvId") Long cvId) throws IOException {
+        CV cv = cVService.uploadFileDocument(file, cvId);
+        String url = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/werkzoekende/cv/download/")
+                .path(Objects.requireNonNull(file.getOriginalFilename()))
+                .toUriString();
 
         String contentType = file.getContentType();
 
-        return new FileUploadResponse(cv.getFileName(), url, contentType );
+        return new FileUploadResponse(cv.getFileName(), url, contentType);
     }
 
     @GetMapping("/download/{fileName}")
     ResponseEntity<byte[]> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
-
         CV document = cVService.singleFileDownload(fileName, request);
 
+        String mimeType = request.getServletContext().getMimeType(document.getFileName());
+        if (mimeType == null) {
+            mimeType = "application/octet-stream"; // Standaard MIME-type voor onbekende bestandstypes
+        }
 
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + document.getFileName()).body(document.getDocFile());
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(mimeType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=" + document.getFileName())
+                .body(document.getDocFile());
     }
 
 
+//
 //    @GetMapping("/download/{fileName}")
 //    ResponseEntity<byte[]> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
-//        CV cv = cVService.singleFileDownload(fileName);
-//        String mimeType = request.getServletContext().getMimeType(cv.getFileName());
-//        mimeType = mimeType != null ? mimeType : "application/octet-stream";
 //
-//        return ResponseEntity.ok()
-//                .contentType(MediaType.parseMediaType(mimeType))
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + cv.getFileName())
-//                .body(cv.getDocFile());
+//        CV document = cVService.singleFileDownload(fileName, request);
+//
+//
+//        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + document.getFileName()).body(document.getDocFile());
 //    }
 
 }

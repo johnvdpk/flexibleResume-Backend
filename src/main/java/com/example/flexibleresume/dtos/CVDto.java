@@ -1,9 +1,4 @@
 package com.example.flexibleresume.dtos;
-
-import com.example.flexibleresume.models.JobSeeker;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +10,9 @@ import java.util.List;
 @AllArgsConstructor
 public class CVDto {
 
+    private String fileName;
+    private String url;
+    private String contentType;
     private String aboutMe;
     private List workInfos;
     private List personalInfos;

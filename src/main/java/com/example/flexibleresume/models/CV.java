@@ -26,6 +26,8 @@ public class CV {
     @Lob
     private byte[] docFile;
     private String fileName;
+
+
     @Column(name = "about_me", length = 500)
     private String aboutMe;
 

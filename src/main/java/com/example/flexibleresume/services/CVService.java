@@ -8,6 +8,7 @@ import com.example.flexibleresume.models.CV;
 import com.example.flexibleresume.repositorys.CVRepository;
 import com.example.flexibleresume.repositorys.JobSeekerRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -86,28 +87,22 @@ public class CVService {
         return cVDto;
     }
 
-    public CV uploadFileDocument(MultipartFile file) throws IOException {
+    @Transactional
+    public CV uploadFileDocument(MultipartFile file, Long cvId) throws IOException {
         String name = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-        CV cv = new CV();
+
+        CV cv = cVRepos.findById(cvId)
+                .orElseThrow(() -> new RecordNotFoundException("CV niet gevonden met id: " + cvId));
+
         cv.setFileName(name);
         cv.setDocFile(file.getBytes());
 
-        cVRepos.save(cv);
-
-        return cv;
-
+        return cVRepos.save(cv);
     }
 
-
-
+    @Transactional
     public CV singleFileDownload(String fileName, HttpServletRequest request){
-
-        CV cv = cVRepos.findByFileName(fileName);
-
-        String mimeType = request.getServletContext().getMimeType(cv.getFileName());
-
-        return cv;
-
+        return cVRepos.findByFileName(fileName);
     }
 
 

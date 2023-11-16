@@ -1,7 +1,5 @@
 package com.example.flexibleresume.dtos;
 
-
-import com.example.flexibleresume.models.JobSeeker;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +11,9 @@ import java.util.List;
 @AllArgsConstructor
 public class CVInputDto {
 
+    private String fileName;
+    private String url;
+    private String contentType;
     private String aboutMe;
     private List workInfos;
     private List personalInfos;

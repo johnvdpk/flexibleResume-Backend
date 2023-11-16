@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class FileUploadResponse {
 
     String fileName;
-    String contentType;
     String url;
+    String contentType;
 
 }

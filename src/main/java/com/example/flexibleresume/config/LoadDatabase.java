@@ -43,7 +43,7 @@ public class LoadDatabase {
             userRepos.save(user);
 
             User employerUser = User.builder()
-                    .email("employer@email.com")
+                    .email("company@email.com")
                     .password(passwordEncoder.encode("1234"))
                     .role(Role.COMPANY)
                     .build();
@@ -74,7 +74,7 @@ public class LoadDatabase {
 
             // Maak en sla een CV op
             CV cv = new CV();
-            cv.setAboutMe("Gepassioneerde developer met ervaring in Java en Spring Framework.");
+            cv.setAboutMe("Ervaren en enthousiaste ontwikkelaar, deskundig in Java en het Spring Framework, met een sterke drive om innovatieve softwareoplossingen te creëren. Mijn expertise in Java, gecombineerd met diepgaande kennis van het Spring Framework, stelt mij in staat om complexe projecten met precisie en efficiëntie te leiden. Ik ben toegewijd aan het continu verbeteren van mijn vaardigheden en het bijdragen aan succesvolle, gebruikersgerichte applicaties.");
             cv.setJobSeeker(jobSeeker); // Koppel aan JobSeeker
             CV savedCV = cVRepos.save(cv);
             Long cvId = savedCV.getId();
