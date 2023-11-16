@@ -29,10 +29,6 @@ public class LoadDatabase {
 
             JobSeeker jobSeeker = new JobSeeker();
 
-
-
-
-
             // Maak en sla een User op
             User user = User.builder()
                     .email("johndoe@email.com")
@@ -42,8 +38,9 @@ public class LoadDatabase {
                     .build();
             userRepos.save(user);
 
+
             User employerUser = User.builder()
-                    .email("company@email.com")
+                    .email("bedrijf@email.com")
                     .password(passwordEncoder.encode("1234"))
                     .role(Role.COMPANY)
                     .build();
@@ -74,7 +71,7 @@ public class LoadDatabase {
 
             // Maak en sla een CV op
             CV cv = new CV();
-            cv.setAboutMe("Ervaren en enthousiaste ontwikkelaar, deskundig in Java en het Spring Framework, met een sterke drive om innovatieve softwareoplossingen te creëren. Mijn expertise in Java, gecombineerd met diepgaande kennis van het Spring Framework, stelt mij in staat om complexe projecten met precisie en efficiëntie te leiden. Ik ben toegewijd aan het continu verbeteren van mijn vaardigheden en het bijdragen aan succesvolle, gebruikersgerichte applicaties.");
+            cv.setAboutMe("Ervaren en enthousiaste ontwikkelaar, deskundig in Java en het Spring Framework, met een sterke drive om innovatieve softwareoplossingen te creëren. Mijn expertise in Java, gecombineerd met diepgaande kennis van het Spring Framework, stelt mij in staat om complexe projecten met precisie en efficiëntie te leiden.");
             cv.setJobSeeker(jobSeeker); // Koppel aan JobSeeker
             CV savedCV = cVRepos.save(cv);
             Long cvId = savedCV.getId();
@@ -88,6 +85,15 @@ public class LoadDatabase {
             workInfo.setJobInfo("Ontwikkelde nieuwe features voor een e-commerce platform.");
             workInfo.setCv(cv);
             workInfoRepos.save(workInfo);
+
+
+            WorkInfo workInfo2 = new WorkInfo();
+            workInfo2.setCompany("Innovative Tech Inc.");
+            workInfo2.setJobTitle("Senior Software Engineer");
+            workInfo2.setPeriodOfEmployment("2021-Present");
+            workInfo2.setJobInfo("Leidt een team van ontwikkelaars voor cutting-edge projecten.");
+            workInfo2.setCv(cv);
+            workInfoRepos.save(workInfo2);
 
             // Persoonlijke informatie toevoegen
             PersonalInfo personalInfo = new PersonalInfo();
@@ -106,9 +112,25 @@ public class LoadDatabase {
             studyInfo.setCv(cv);
             studyInfoRepos.save(studyInfo);
 
+            StudyInfo studyInfo2 = new StudyInfo();
+            studyInfo2.setEducationalInstitute("Technische Universiteit Delft");
+            studyInfo2.setEducation("Master's in Computer Science");
+            studyInfo2.setPeriodOfStudy("2013-2015");
+            studyInfo2.setStudyInfo("Gespecialiseerd in software-architectuur en cybersecurity.");
+            studyInfo2.setCv(cv);
+            studyInfoRepos.save(studyInfo2);
+
+            PersonalInfo personalInfo2 = new PersonalInfo();
+            personalInfo2.setHobby("Fotografie");
+            personalInfo2.setPeriodOfHobby("2015-2023");
+            personalInfo2.setHobbyInfo("Actief in landschaps- en portretfotografie.");
+            personalInfo2.setCv(cv);
+            personalInfoRepos.save(personalInfo2);
+
+
             Employer employer = new Employer();
             // Vul de velden van Employer in
-            employer.setCompany("TechCorp");
+            employer.setCompany("Sunrise In");
             employer.setIndustry("IT");
             employer.setOfficeAdress("Technostraat 5");
             employer.setOfficeAdressNumber("5A");
@@ -124,6 +146,28 @@ public class LoadDatabase {
             // Update employerUser met de gekoppelde employer
             employerUser.setEmployer(employer);
             userRepos.save(employerUser);
+
+            JobSeeker jobSeeker2 = new JobSeeker();
+
+            User user2 = User.builder()
+                    .email("patrick@email.com")
+                    .password(passwordEncoder.encode("1234"))
+                    .role(Role.USER)
+                    .jobSeeker(jobSeeker2)
+                    .build();
+            userRepos.save(user2);
+
+           jobSeeker2.setFirstName("Patrick");
+           jobSeeker2.setSurName("Doet het zelfwel");
+           jobSeeker2.setDateOfBirth(LocalDate.parse("1986-05-04"));
+           jobSeeker2.setEmail("patrick_vanzelf@email.com");
+           jobSeeker2.setPhoneNumber("0632652145");
+           jobSeeker2.setResidence("Utrecht");
+           jobSeeker2.setZipCode("3423TW");
+           jobSeeker2.setHomeAddress("Anderestraat");
+           jobSeeker2.setHouseNumber("76b");
+           jobSeeker2.setUser(user2);
+           jobSeekerRepos.save(jobSeeker2);
 
 
         };

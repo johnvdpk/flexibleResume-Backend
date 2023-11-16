@@ -15,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,18 +81,16 @@ class JobSeekerServiceTest {
 
     @Test
     void getAllJobSeekers() {
-        Long id = 1L;
-        Optional<JobSeeker> jobSeekerOptional = Optional.of(jobSeeker);
-        when(jobSeekerRepository.findById(id)).thenReturn(jobSeekerOptional);
 
-        JobSeekerDto jobSeekerDto = new JobSeekerDto(); // Maak een dummy JobSeekerDto object
-        // Stel eventueel velden van jobSeekerDto in die overeenkomen met jobSeeker
-        when(jobSeekerService.jobSeekerToDto(jobSeeker)).thenReturn(jobSeekerDto);
+        List<JobSeeker> jobSeekerList = new ArrayList<>();
+        jobSeekerList.add(jobSeeker);
 
-        List<JobSeekerDto> result = jobSeekerService.getAllJobSeekers(id);
+        when(jobSeekerRepository.findAll()).thenReturn(jobSeekerList);
 
-        assertEquals(1, result.size());
-        assertEquals(jobSeekerDto, result.get(0)); // Controleer of de resultaten JobSeekerDto objecten zijn
+        List<JobSeekerDto> result = jobSeekerService.getAllJobSeekers();
+
+        assertFalse(result.isEmpty());
+        assertEquals(jobSeeker.getFirstName(), result.get(0).getFirstName());
     }
 
     @Test
@@ -104,31 +103,6 @@ class JobSeekerServiceTest {
         assertNotNull(result);
         assertEquals(jobSeeker.getFirstName(), result.getFirstName());
     }
-
-//    @Test
-//    void getJobSeekerByEmail() {
-//        String email = "john@example.com";
-//        doReturn(Optional.of(user)).when(userRepository).findByEmail(email);
-//        doReturn(jobSeeker).when(user).getJobSeeker();
-//
-//        JobSeekerDto result = jobSeekerService.getJobSeekerByEmail(email);
-//
-//        assertNotNull(result);
-//        assertEquals(jobSeeker.getEmail(), result.getEmail());
-//    }
-//
-//    @Test
-//    void updateJobSeeker() {
-//        String email = "john@example.com";
-//        when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
-//        when(user.getJobSeeker()).thenReturn(jobSeeker);
-//        when(jobSeekerRepository.save(any(JobSeeker.class))).thenReturn(jobSeeker);
-//
-//        JobSeekerDto result = jobSeekerService.updateJobSeeker(email, jobSeekerInputDto);
-//
-//        assertNotNull(result);
-//        // Voeg verificaties toe voor de bijgewerkte velden
-//    }
 
 
 
