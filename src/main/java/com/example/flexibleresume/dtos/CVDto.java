@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CVDto {
 
+
     private String fileName;
     private String url;
     private String contentType;

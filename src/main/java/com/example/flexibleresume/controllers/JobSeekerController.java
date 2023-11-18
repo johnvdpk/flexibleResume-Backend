@@ -2,17 +2,13 @@ package com.example.flexibleresume.controllers;
 
 import com.example.flexibleresume.dtos.JobSeekerDto;
 import com.example.flexibleresume.dtos.JobSeekerInputDto;
-import com.example.flexibleresume.exceptions.RecordNotFoundException;
-import com.example.flexibleresume.models.JobSeeker;
 import com.example.flexibleresume.services.JobSeekerService;
-import com.example.flexibleresume.user.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import java.net.URI;
+
 import java.util.List;
 import java.util.Optional;
 

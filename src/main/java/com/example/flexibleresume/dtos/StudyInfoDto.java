@@ -1,7 +1,5 @@
 package com.example.flexibleresume.dtos;
 
-import com.example.flexibleresume.models.CV;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

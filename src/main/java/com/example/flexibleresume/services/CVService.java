@@ -31,6 +31,7 @@ public class CVService {
     public CVDto CVtoDto(CV cv) {
         CVDto cvDto = new CVDto();
 
+
         cvDto.setAboutMe(cv.getAboutMe());
 
         return cvDto;

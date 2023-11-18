@@ -38,7 +38,7 @@ class JobSeekerTest {
 
     @AfterEach
     void tearDown() {
-        // Hier ruimen we de resources op, indien nodig
+
         jobSeeker = null;
     }
 

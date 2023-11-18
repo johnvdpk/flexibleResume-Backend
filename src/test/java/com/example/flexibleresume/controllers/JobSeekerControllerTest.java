@@ -4,7 +4,6 @@ import com.example.flexibleresume.config.JwtService;
 import com.example.flexibleresume.config.SecurityConfigTest;
 import com.example.flexibleresume.dtos.JobSeekerDto;
 import com.example.flexibleresume.dtos.JobSeekerInputDto;
-import com.example.flexibleresume.models.JobSeeker;
 import com.example.flexibleresume.services.JobSeekerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.mockito.ArgumentMatchers;
@@ -26,9 +25,6 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.util.List;
-import java.util.Optional;
-
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(JobSeekerController.class)
 @Import(SecurityConfigTest.class)
@@ -42,15 +38,6 @@ public class JobSeekerControllerTest {
 
     @MockBean
     private JwtService jwtService;
-//    @Test
-//    public void getAllJobSeekersTest() throws Exception {
-//        List<JobSeeker> jobSeekers = List.of(new JobSeeker(/* init velden */));
-//        when(jobSeekerService.getAllJobSeekers(Optional.empty())).thenReturn(jobSeekers);
-//
-//        mockMvc.perform(get("/werkzoekende/all"))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$", hasSize(1)));
-//    }
 
 
     @Test

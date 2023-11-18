@@ -3,8 +3,6 @@ package com.example.flexibleresume.services;
 
 import com.example.flexibleresume.dtos.UserDto;
 import com.example.flexibleresume.dtos.UserInputDto;
-import com.example.flexibleresume.models.JobSeeker;
-import com.example.flexibleresume.repositorys.JobSeekerRepository;
 import com.example.flexibleresume.repositorys.UserRepository;
 import com.example.flexibleresume.user.User;
 import org.springframework.security.crypto.password.PasswordEncoder;

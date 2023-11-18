@@ -1,10 +1,7 @@
 package com.example.flexibleresume.controllers;
 
-import com.example.flexibleresume.dtos.JobSeekerDto;
-import com.example.flexibleresume.dtos.JobSeekerInputDto;
 import com.example.flexibleresume.dtos.WorkInfoDto;
 import com.example.flexibleresume.dtos.WorkInfoInputDto;
-import com.example.flexibleresume.models.JobSeeker;
 import com.example.flexibleresume.models.WorkInfo;
 import com.example.flexibleresume.services.WorkInfoService;
 import lombok.RequiredArgsConstructor;

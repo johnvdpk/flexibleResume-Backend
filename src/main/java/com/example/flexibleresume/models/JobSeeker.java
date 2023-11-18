@@ -3,7 +3,6 @@ package com.example.flexibleresume.models;
 import com.example.flexibleresume.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

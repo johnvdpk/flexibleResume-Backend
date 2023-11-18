@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.MediaType;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
@@ -80,16 +79,6 @@ public class CVController {
                 .body(document.getDocFile());
     }
 
-
-//
-//    @GetMapping("/download/{fileName}")
-//    ResponseEntity<byte[]> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
-//
-//        CV document = cVService.singleFileDownload(fileName, request);
-//
-//
-//        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + document.getFileName()).body(document.getDocFile());
-//    }
 
 }
 

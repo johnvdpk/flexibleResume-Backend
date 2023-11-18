@@ -1,10 +1,8 @@
 package com.example.flexibleresume.config;
-
 import com.example.flexibleresume.models.*;
 import com.example.flexibleresume.repositorys.*;
 import com.example.flexibleresume.user.Role;
 import com.example.flexibleresume.user.User;
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

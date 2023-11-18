@@ -2,19 +2,13 @@ package com.example.flexibleresume.services;
 
 import com.example.flexibleresume.dtos.EmployerDto;
 import com.example.flexibleresume.dtos.EmployerInputDto;
-import com.example.flexibleresume.dtos.JobSeekerDto;
-import com.example.flexibleresume.dtos.JobSeekerInputDto;
 import com.example.flexibleresume.exceptions.RecordNotFoundException;
 import com.example.flexibleresume.models.Employer;
-import com.example.flexibleresume.models.JobSeeker;
 import com.example.flexibleresume.repositorys.EmployerRepository;
 import com.example.flexibleresume.repositorys.UserRepository;
 import com.example.flexibleresume.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

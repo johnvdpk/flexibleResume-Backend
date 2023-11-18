@@ -78,7 +78,6 @@ class JobSeekerServiceTest {
     }
 
 
-
     @Test
     void getAllJobSeekers() {
 

@@ -2,7 +2,6 @@ package com.example.flexibleresume.controllers;
 
 import com.example.flexibleresume.dtos.StudyInfoDto;
 import com.example.flexibleresume.dtos.StudyInfoInputDto;
-import com.example.flexibleresume.models.StudyInfo;
 import com.example.flexibleresume.services.StudyInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

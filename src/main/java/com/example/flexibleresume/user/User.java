@@ -3,7 +3,6 @@ package com.example.flexibleresume.user;
 
 import com.example.flexibleresume.models.Employer;
 import com.example.flexibleresume.models.JobSeeker;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
