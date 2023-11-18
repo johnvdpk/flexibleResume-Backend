@@ -2,36 +2,45 @@ package com.example.flexibleresume.controllers;
 
 import com.example.flexibleresume.dtos.JobSeekerDto;
 import com.example.flexibleresume.dtos.JobSeekerInputDto;
-import com.example.flexibleresume.models.JobSeeker;
 import com.example.flexibleresume.services.JobSeekerService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
-@RequestMapping("/werkzoekende") // website is voor nu in het nederlands
+@RequiredArgsConstructor
+@RequestMapping("/werkzoekende") // website is in het Nederlands
 public class JobSeekerController {
 
 
     private final JobSeekerService jobSeekerService;
 
-    public JobSeekerController(JobSeekerService jobSeekerService) {
-        this.jobSeekerService = jobSeekerService;
+
+
+    @GetMapping("/naam")
+    public ResponseEntity<List<JobSeekerDto>> getAllJobSeekers(@RequestParam(value = "surName", required = false) Optional<String> surName) {
+
+        List<JobSeekerDto> jobSeekerDtos;
+
+        if (surName.isEmpty()){
+
+            jobSeekerDtos = jobSeekerService.getAllJobSeekers();
+
+        } else {
+            jobSeekerDtos = jobSeekerService.getAllJobSeekersBySurName(surName.get());
+
+        }
+
+        return ResponseEntity.ok().body(jobSeekerDtos);
+
     }
 
-
-    @GetMapping
-    public ResponseEntity<List<JobSeeker>>getAllJobSeekers(@RequestParam(value = "id", required = false)Optional<Long> id) {
-        List<JobSeeker> jobSeekers = jobSeekerService.getAllJobSeekers(id);
-
-    return ResponseEntity.ok().body(jobSeekers);
-
-    }
 
     @GetMapping("/voornaam/{firstName}")
     public ResponseEntity<JobSeekerDto> getJobSeekerByFirstName(@PathVariable String firstName) {
@@ -47,21 +56,25 @@ public class JobSeekerController {
         return ResponseEntity.ok(jobSeekerDto);
     }
 
-    @PostMapping()
-    public ResponseEntity<JobSeekerDto> addJobSeeker(@Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
+
+    @PostMapping
+    public ResponseEntity<JobSeekerDto> addJobSeeker(@RequestBody JobSeekerInputDto jobSeekerInputDto)
+    {
         JobSeekerDto jobSeekerDto = jobSeekerService.addJobSeeker(jobSeekerInputDto);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(jobSeekerDto.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).body(jobSeekerDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(jobSeekerDto);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<JobSeekerDto> updateJobSeeker(@PathVariable Long id, @Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
-        JobSeekerDto jobSeekerDto = jobSeekerService.updateJobSeeker(id, jobSeekerInputDto);
+
+    @PutMapping("/email/{email}")
+    public ResponseEntity<JobSeekerDto> updateJobSeeker(@PathVariable String email, @Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
+        JobSeekerDto jobSeekerDto = jobSeekerService.updateJobSeeker(email, jobSeekerInputDto);
+
+        return ResponseEntity.ok().body(jobSeekerDto);
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<JobSeekerDto> getJobSeekerByEmail(@PathVariable String email) {
+        JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerByEmail(email);
 
         return ResponseEntity.ok().body(jobSeekerDto);
     }
