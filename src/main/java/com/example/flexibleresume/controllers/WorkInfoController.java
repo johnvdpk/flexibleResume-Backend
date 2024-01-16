@@ -26,6 +26,9 @@ public class WorkInfoController {
     @GetMapping("/all")
     public ResponseEntity<List<WorkInfo>>getAllWorkinfos(@RequestParam(value = "id", required = false) Optional<Long> id) {
         List<WorkInfo> workInfo = workInfoService.getAllWorkInfos(id);
+        if(workInfo == null) {
+            workInfo = List.of();
+        }
 
         return ResponseEntity.ok().body(workInfo);
 
@@ -34,6 +37,9 @@ public class WorkInfoController {
     @GetMapping("/id/{id}")
     public ResponseEntity<List<WorkInfoDto>> getWorkInfoById(@PathVariable Long id) {
         List<WorkInfoDto> workInfoDtos = workInfoService.getWorkInfoById(id);
+        if( workInfoDtos == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         return ResponseEntity.ok().body(workInfoDtos);
     }
@@ -41,6 +47,9 @@ public class WorkInfoController {
     @GetMapping("/{cvId}")
     public ResponseEntity<List<WorkInfoDto>> getWorkInfoByCvId(@PathVariable Long cvId) {
         List<WorkInfoDto> workInfoDtos = workInfoService.getWorkInfoByCvId(cvId);
+        if(workInfoDtos == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok().body(workInfoDtos);
     }
 
@@ -49,12 +58,18 @@ public class WorkInfoController {
                                                        @RequestBody WorkInfoInputDto workInfoInputDto) {
 
         WorkInfoDto workInfoDto = workInfoService.createWorkInfo(workInfoInputDto, cvId);
+        if(workInfoDto == null) {
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(workInfoDto);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<WorkInfoDto> updateWorkInfo(@PathVariable Long id, @RequestBody WorkInfoInputDto workInfoInputDto) {
         WorkInfoDto updatedWorkInfo = workInfoService.updateWorkInfo(id, workInfoInputDto);
+        if(updatedWorkInfo == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(updatedWorkInfo);
     }
 

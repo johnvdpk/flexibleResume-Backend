@@ -24,25 +24,37 @@ public class EmployerController {
     @GetMapping("/{id}")
     public ResponseEntity<EmployerDto> getEmployerById(@PathVariable Long id) {
         EmployerDto employer = employerService.getEmployerById(id);
+        if(employer == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(employer);
     }
 
     @GetMapping("/email/{email}")
     public ResponseEntity<EmployerDto> getJobSeekerByEmail(@PathVariable String email) {
         EmployerDto employerDto = employerService.getEmployerByEmail(email);
-
+        if(employerDto == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok().body(employerDto);
     }
 
     @PostMapping
     public ResponseEntity<EmployerDto> addEmployer(@RequestBody EmployerInputDto employerInputDto) {
         EmployerDto newEmployer = employerService.addEmployer(employerInputDto);
+        if(newEmployer == null) {
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(newEmployer);
     }
 
     @PutMapping("/email/{email}")
     public ResponseEntity<EmployerDto> updateEmployer(@PathVariable String email, @Valid @RequestBody EmployerInputDto employerInputDto) {
         EmployerDto updatedEmployer = employerService.updateEmployer(email, employerInputDto);
+        if (updatedEmployer == null) {
+            return ResponseEntity.notFound().build();
+        }
+
 
         return ResponseEntity.ok(updatedEmployer);
     }
@@ -50,6 +62,9 @@ public class EmployerController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmployer(@PathVariable Long id) {
         employerService.deleteEmployer(id);
+        if(employerService.getEmployerById(id) != null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.noContent().build();
     }
 }

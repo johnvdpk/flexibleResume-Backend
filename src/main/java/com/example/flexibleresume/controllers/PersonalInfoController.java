@@ -21,12 +21,19 @@ public class PersonalInfoController {
     @GetMapping("/all")
     public ResponseEntity<List<PersonalInfoDto>> getAllPersonalInfos() {
         List<PersonalInfoDto> personalInfoDtos = personalInfoService.getAllPersonalInfos();
+
+        if(personalInfoDtos == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok().body(personalInfoDtos);
     }
 
     @GetMapping("/{cvId}")
     public ResponseEntity<List<PersonalInfoDto>> getPersonalInfoByCvId(@PathVariable Long cvId) {
         List<PersonalInfoDto> personalInfoDtos = personalInfoService.getPersonalInfoByCvId(cvId);
+        if (personalInfoDtos == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok().body(personalInfoDtos);
     }
 
@@ -35,6 +42,9 @@ public class PersonalInfoController {
     public ResponseEntity<PersonalInfoDto> createPersonalInfo(@PathVariable Long cvId,
                                                               @RequestBody PersonalInfoInputDto personalInfoInputDto) {
         PersonalInfoDto personalInfoDto = personalInfoService.createPersonalInfo(personalInfoInputDto, cvId);
+        if(personalInfoDto == null) {
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(personalInfoDto);
     }
 
@@ -42,12 +52,16 @@ public class PersonalInfoController {
     public ResponseEntity<PersonalInfoDto> updatePersonalInfo(@PathVariable Long id,
                                                               @RequestBody PersonalInfoInputDto personalInfoInputDto) {
         PersonalInfoDto updatedPersonalInfo = personalInfoService.updatePersonalInfo(id, personalInfoInputDto);
+        if(updatedPersonalInfo == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(updatedPersonalInfo);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePersonalInfo(@PathVariable Long id) {
         personalInfoService.deletePersonalInfo(id);
+
         return ResponseEntity.noContent().build();
     }
 }

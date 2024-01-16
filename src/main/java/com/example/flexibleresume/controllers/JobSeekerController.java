@@ -45,6 +45,9 @@ public class JobSeekerController {
     @GetMapping("/firstname/{firstName}")
     public ResponseEntity<JobSeekerDto> getJobSeekerByFirstName(@PathVariable String firstName) {
         JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerByFirstName(firstName);
+        if(jobSeekerDto == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         return ResponseEntity.ok(jobSeekerDto);
     }
@@ -52,6 +55,9 @@ public class JobSeekerController {
     @GetMapping("/surname/{surName}")
     public ResponseEntity<JobSeekerDto> getJobSeekerBySurName(@PathVariable String surName) {
         JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerBySurName(surName);
+        if(jobSeekerDto == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         return ResponseEntity.ok(jobSeekerDto);
     }
@@ -61,6 +67,9 @@ public class JobSeekerController {
     public ResponseEntity<JobSeekerDto> addJobSeeker(@RequestBody JobSeekerInputDto jobSeekerInputDto)
     {
         JobSeekerDto jobSeekerDto = jobSeekerService.addJobSeeker(jobSeekerInputDto);
+        if(jobSeekerDto == null) {
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(jobSeekerDto);
     }
 
@@ -68,6 +77,9 @@ public class JobSeekerController {
     @PutMapping("/email/{email}")
     public ResponseEntity<JobSeekerDto> updateJobSeeker(@PathVariable String email, @Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
         JobSeekerDto jobSeekerDto = jobSeekerService.updateJobSeeker(email, jobSeekerInputDto);
+        if(jobSeekerDto == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         return ResponseEntity.ok().body(jobSeekerDto);
     }
@@ -75,6 +87,9 @@ public class JobSeekerController {
     @GetMapping("/email/{email}")
     public ResponseEntity<JobSeekerDto> getJobSeekerByEmail(@PathVariable String email) {
         JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerByEmail(email);
+        if(jobSeekerDto == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         return ResponseEntity.ok().body(jobSeekerDto);
     }
