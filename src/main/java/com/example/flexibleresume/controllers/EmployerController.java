@@ -14,7 +14,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
-@RequestMapping("/werkgever") // Nederlandse website
+@RequestMapping("/employer") // Nederlandse website
 @RequiredArgsConstructor
 public class EmployerController {
 

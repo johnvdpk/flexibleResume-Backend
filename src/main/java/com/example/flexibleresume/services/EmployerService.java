@@ -17,7 +17,7 @@ public class EmployerService {
     private final EmployerRepository employerRepos;
     private final UserRepository userRepos;
 
-    // Omzetten van Employer naar EmployerDto
+
     private EmployerDto employerToDto(Employer employer) {
         return new EmployerDto(
                 employer.getCompany(),
@@ -33,10 +33,10 @@ public class EmployerService {
         );
     }
 
-    // Omzetten van EmployerInputDto naar Employer
+
     private Employer inputDtoToEmployer(EmployerInputDto dto) {
         Employer employer = new Employer();
-        // Set alle velden van Employer
+
 
         employer.setCompany(dto.getCompany());
         employer.setIndustry(dto.getIndustry());
@@ -52,7 +52,7 @@ public class EmployerService {
     }
 
 
-    // Toevoegen van een nieuwe Employer
+
     public EmployerDto addEmployer(EmployerInputDto dto) {
         Employer employer = inputDtoToEmployer(dto);
         employer = employerRepos.save(employer);
@@ -86,7 +86,7 @@ public class EmployerService {
     }
 
 
-    // Ophalen van een Employer op basis van ID
+
     public EmployerDto getEmployerById(Long id) {
         Employer employer = employerRepos.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Employer niet gevonden met id: " + id));
@@ -105,7 +105,7 @@ public class EmployerService {
         return employerToDto(employer);
     }
 
-    // Verwijderen van een Employer
+
     public void deleteEmployer(Long id) {
         employerRepos.deleteById(id);
     }

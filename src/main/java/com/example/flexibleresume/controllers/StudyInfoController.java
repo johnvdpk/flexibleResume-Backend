@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/werkzoekende/studieinfo")
+@RequestMapping("/jobseeker/studyinfo")
 public class StudyInfoController {
 
     private final StudyInfoService studyInfoService;

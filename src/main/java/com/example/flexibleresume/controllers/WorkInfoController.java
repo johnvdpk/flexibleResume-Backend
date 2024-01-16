@@ -16,7 +16,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/werkzoekende/werkinfo")
+@RequestMapping("/jobseeker/workinfo")
 public class WorkInfoController {
 
 

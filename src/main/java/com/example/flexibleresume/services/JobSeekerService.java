@@ -25,7 +25,7 @@ public class JobSeekerService {
     private final CVRepository CVRepos;
 
 
-    // JobSeeker naar JobSeekerDto. Database richting client.
+
     public JobSeekerDto jobSeekerToDto(JobSeeker jobSeeker) {
     JobSeekerDto jobSeekerDto = new JobSeekerDto();
 
@@ -45,7 +45,7 @@ public class JobSeekerService {
     }
 
 
-    // InputDto naar JobSeeker. Client richting Database
+
     public JobSeeker inputDtoToJobSeeker(JobSeekerInputDto jobSeekerInputDto) {
         JobSeeker jobSeeker = new JobSeeker();
 
@@ -70,9 +70,6 @@ public class JobSeekerService {
         return CVRepos.save(cv);
     }
 
-
-
-    // Alle Gets
 
 
     public List<JobSeekerDto> getAllJobSeekers() {
@@ -135,9 +132,6 @@ public class JobSeekerService {
     }
 
 
-
-    // note to myself. InputDto wordt omgezet naar het model. En vervolgens wordt het weer terug gegegeven aan de dto
-//Long userId
     public JobSeekerDto addJobSeeker(JobSeekerInputDto jobSeekerInputDto ) {
 
         JobSeeker jobseeker = inputDtoToJobSeeker(jobSeekerInputDto);
@@ -155,7 +149,7 @@ public class JobSeekerService {
         if(existingJobSeeker == null) {
                throw new RecordNotFoundException("Geen JobSeeker gekoppeld aan deze user gevonden");
         }
-        // Update de velden van de bestaande jobseeker
+
         existingJobSeeker.setFirstName(jobSeekerInputDto.getFirstName());
         existingJobSeeker.setSurName(jobSeekerInputDto.getSurName());
         existingJobSeeker.setDateOfBirth(jobSeekerInputDto.getDateOfBirth());
@@ -166,10 +160,10 @@ public class JobSeekerService {
         existingJobSeeker.setHomeAddress(jobSeekerInputDto.getHomeAddress());
         existingJobSeeker.setHouseNumber(jobSeekerInputDto.getHouseNumber());
 
-        // Sla de bijgewerkte jobseeker op
+
         JobSeeker updatedJobSeeker = jobSeekerRepos.save(existingJobSeeker);
 
-        // Zet om naar DTO en return
+
         return jobSeekerToDto(updatedJobSeeker);
     }
 

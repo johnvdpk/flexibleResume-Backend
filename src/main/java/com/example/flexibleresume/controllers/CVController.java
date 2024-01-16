@@ -23,7 +23,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/werkzoekende/cv") // website is in het Nederlands
+@RequestMapping("/jobseeker/cv")
 public class CVController {
 
     final private CVService cVService;
@@ -55,7 +55,7 @@ public class CVController {
         CV cv = cVService.uploadFileDocument(file, cvId);
         String url = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
-                .path("/werkzoekende/cv/download/")
+                .path("/jobseeker/cv/download/")
                 .path(Objects.requireNonNull(file.getOriginalFilename()))
                 .toUriString();
 

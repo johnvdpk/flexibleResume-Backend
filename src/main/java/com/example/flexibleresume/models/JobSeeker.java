@@ -18,17 +18,11 @@ import java.util.List;
 @Table(name="jobseekers")
 public class JobSeeker {
 
-    // @Collum geef ik altijd aan, dit is overzichtelijker.
-    // Telefoonnummer, huisnummer en postcode zijn allemaal strings. Het kan zijn dat er andere tekens dan cijfers in voor komen en er worden geen berekeningen mee gemaakt.
-
-    //Een 'jobseeker' werkzoekende kan meedere CV's hebben. Dit wordt eigenlijk in de frontend gedaan. maar voor de zekerheid is er een onetomany koppeling gemaakt.
     @OneToMany(mappedBy = "jobSeeker", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CV> cvs = new ArrayList<>();
 
-    // One-to-One relatie met User entity
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "jobSeeker")
     private User user;
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

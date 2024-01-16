@@ -15,7 +15,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/werkzoekende") // website is in het Nederlands
+@RequestMapping("/jobseeker")
 public class JobSeekerController {
 
 
@@ -23,7 +23,7 @@ public class JobSeekerController {
 
 
 
-    @GetMapping("/naam")
+    @GetMapping("/name")
     public ResponseEntity<List<JobSeekerDto>> getAllJobSeekers(@RequestParam(value = "surName", required = false) Optional<String> surName) {
 
         List<JobSeekerDto> jobSeekerDtos;
@@ -42,14 +42,14 @@ public class JobSeekerController {
     }
 
 
-    @GetMapping("/voornaam/{firstName}")
+    @GetMapping("/firstname/{firstName}")
     public ResponseEntity<JobSeekerDto> getJobSeekerByFirstName(@PathVariable String firstName) {
         JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerByFirstName(firstName);
 
         return ResponseEntity.ok(jobSeekerDto);
     }
 
-    @GetMapping("/achternaam/{surName}")
+    @GetMapping("/surname/{surName}")
     public ResponseEntity<JobSeekerDto> getJobSeekerBySurName(@PathVariable String surName) {
         JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerBySurName(surName);
 
