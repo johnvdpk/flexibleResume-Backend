@@ -18,7 +18,7 @@ public class CVDto {
     private String url;
     private String contentType;
     private String aboutMe;
-    private List<WorkInfo> workInfos;
-    private List<PersonalInfo> personalInfos;
-    private List<StudyInfo> studyInfos;
+    private List<WorkInfoDto> workInfos;
+    private List<PersonalInfoDto> personalInfos;
+    private List<StudyInfoDto> studyInfos;
 }

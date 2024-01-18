@@ -18,8 +18,8 @@ public class CVInputDto {
     private String url;
     private String contentType;
     private String aboutMe;
-    private List<WorkInfo> workInfos;
-    private List<PersonalInfo> personalInfos;
-    private List<StudyInfo> studyInfos;
+    private List<WorkInfoInputDto> workInfos;
+    private List<PersonalInfoInputDto> personalInfos;
+    private List<StudyInfoInputDto> studyInfos;
 
 }
