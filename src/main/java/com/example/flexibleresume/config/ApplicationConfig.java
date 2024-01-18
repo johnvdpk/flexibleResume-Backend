@@ -2,6 +2,7 @@ package com.example.flexibleresume.config;
 
 import com.example.flexibleresume.repositorys.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -46,4 +47,15 @@ public class ApplicationConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    // Tijdelijke bean om gehasht wachtwoord te genereren
+    @Bean
+    public CommandLineRunner run(PasswordEncoder passwordEncoder) {
+        return args -> {
+            String encodedPassword = passwordEncoder.encode("1234");
+            System.out.println("Encoded password: " + encodedPassword);
+        };
+    }
+
+
 }
