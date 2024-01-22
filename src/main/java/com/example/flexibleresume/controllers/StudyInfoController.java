@@ -2,6 +2,7 @@ package com.example.flexibleresume.controllers;
 
 import com.example.flexibleresume.dtos.StudyInfoDto;
 import com.example.flexibleresume.dtos.StudyInfoInputDto;
+import com.example.flexibleresume.exceptions.ErrorResponse;
 import com.example.flexibleresume.services.StudyInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,11 +19,12 @@ public class StudyInfoController {
 
     private final StudyInfoService studyInfoService;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<StudyInfoDto>> getAllStudyInfos() {
         List<StudyInfoDto> studyInfos = studyInfoService.getAllStudyInfos();
         if(studyInfos == null) {
-            return ResponseEntity.notFound().build();
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het ophalen van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.ok().body(studyInfos);
     }
@@ -31,7 +33,8 @@ public class StudyInfoController {
     public ResponseEntity<List<StudyInfoDto>> getStudyInfoByCvId(@PathVariable Long cvId) {
         List<StudyInfoDto> studyInfoDtos = studyInfoService.getStudyInfoByCvId(cvId);
         if(studyInfoDtos == null) {
-            return ResponseEntity.notFound().build();
+           ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het ophalen van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.ok().body(studyInfoDtos);
     }
@@ -40,7 +43,8 @@ public class StudyInfoController {
                                                         @RequestBody StudyInfoInputDto studyInfoInputDto) {
         StudyInfoDto studyInfoDto = studyInfoService.createStudyInfo(studyInfoInputDto, cvId);
         if(studyInfoDto == null) {
-            return ResponseEntity.badRequest().build();
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij posten van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(studyInfoDto);
     }
@@ -50,7 +54,8 @@ public class StudyInfoController {
                                                         @RequestBody StudyInfoInputDto studyInfoInputDto) {
         StudyInfoDto updatedStudyInfo = studyInfoService.updateStudyInfo(id, studyInfoInputDto);
         if(updatedStudyInfo == null) {
-            return ResponseEntity.notFound().build();
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het updaten van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.ok(updatedStudyInfo);
     }

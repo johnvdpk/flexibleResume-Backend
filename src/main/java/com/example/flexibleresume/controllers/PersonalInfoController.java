@@ -2,6 +2,7 @@ package com.example.flexibleresume.controllers;
 
 import com.example.flexibleresume.dtos.PersonalInfoDto;
 import com.example.flexibleresume.dtos.PersonalInfoInputDto;
+import com.example.flexibleresume.exceptions.ErrorResponse;
 import com.example.flexibleresume.services.PersonalInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,12 +19,13 @@ public class PersonalInfoController {
 
     private final PersonalInfoService personalInfoService;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<PersonalInfoDto>> getAllPersonalInfos() {
         List<PersonalInfoDto> personalInfoDtos = personalInfoService.getAllPersonalInfos();
 
         if(personalInfoDtos == null) {
-            return ResponseEntity.notFound().build();
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het ophalen van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.ok().body(personalInfoDtos);
     }
@@ -32,7 +34,8 @@ public class PersonalInfoController {
     public ResponseEntity<List<PersonalInfoDto>> getPersonalInfoByCvId(@PathVariable Long cvId) {
         List<PersonalInfoDto> personalInfoDtos = personalInfoService.getPersonalInfoByCvId(cvId);
         if (personalInfoDtos == null) {
-            return ResponseEntity.notFound().build();
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het ophalen van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.ok().body(personalInfoDtos);
     }
@@ -43,7 +46,8 @@ public class PersonalInfoController {
                                                               @RequestBody PersonalInfoInputDto personalInfoInputDto) {
         PersonalInfoDto personalInfoDto = personalInfoService.createPersonalInfo(personalInfoInputDto, cvId);
         if(personalInfoDto == null) {
-            return ResponseEntity.badRequest().build();
+           ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het posten van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(personalInfoDto);
     }
@@ -53,7 +57,8 @@ public class PersonalInfoController {
                                                               @RequestBody PersonalInfoInputDto personalInfoInputDto) {
         PersonalInfoDto updatedPersonalInfo = personalInfoService.updatePersonalInfo(id, personalInfoInputDto);
         if(updatedPersonalInfo == null) {
-            return ResponseEntity.notFound().build();
+           ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het updaten van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.ok(updatedPersonalInfo);
     }

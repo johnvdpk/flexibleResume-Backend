@@ -30,8 +30,8 @@ public class User implements UserDetails {
     private JobSeeker jobSeeker;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "Employer_id",referencedColumnName = "id") // Deze kolom zal in de 'users' tabel worden aangemaakt.
-    private Employer employer ;
+    @JoinColumn(name = "employer_id",referencedColumnName = "id") // Deze kolom zal in de 'users' tabel worden aangemaakt.
+    private Employer employer;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

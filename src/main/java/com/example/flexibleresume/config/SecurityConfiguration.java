@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -22,35 +23,17 @@ public class SecurityConfiguration {
 
 
     @Bean
-    public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
-
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
                 .httpBasic(basic -> basic.disable())
-                .authorizeHttpRequests(auth ->
-                        auth
-
-         .requestMatchers("/**").permitAll()
-
-                 .requestMatchers("/auth/**").hasAnyRole("USER", "ADMIN")
-                .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                .requestMatchers(HttpMethod.POST,"/auth/authenticate").hasAnyRole("USER","ADMIN")
-
-                .requestMatchers(HttpMethod.POST, "/werkzoekende/**").hasAnyRole("USER","ADMIN")
-                .requestMatchers(HttpMethod.GET,"/werkzoekende/**").hasAnyRole("USER","ADMIN")
-                .requestMatchers(HttpMethod.POST,"/werkzoekende/**").hasAnyRole("USER","ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/werkzoekende/**").hasAnyRole("USER","ADMIN")
-                .requestMatchers("/werkzoekende/**").hasAnyRole("USER","ADMIN")
-                .requestMatchers(HttpMethod.POST, "/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
-                .requestMatchers(HttpMethod.GET,"/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
-                .requestMatchers(HttpMethod.POST,"/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
-                .requestMatchers("/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
-
-                .anyRequest().authenticated()
-
-                )
-
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(new AntPathRequestMatcher("/auth/register", "POST")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/auth/authenticate", "POST")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/jobseeker/**")).hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/employer/**")).hasAnyRole("COMPANY", "ADMIN")
+                        .anyRequest().authenticated())
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

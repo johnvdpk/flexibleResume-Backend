@@ -2,6 +2,7 @@ package com.example.flexibleresume.controllers;
 
 import com.example.flexibleresume.dtos.JobSeekerDto;
 import com.example.flexibleresume.dtos.JobSeekerInputDto;
+import com.example.flexibleresume.exceptions.ErrorResponse;
 import com.example.flexibleresume.services.JobSeekerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -68,7 +69,8 @@ public class JobSeekerController {
     {
         JobSeekerDto jobSeekerDto = jobSeekerService.addJobSeeker(jobSeekerInputDto);
         if(jobSeekerDto == null) {
-            return ResponseEntity.badRequest().build();
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het posten van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(jobSeekerDto);
     }
@@ -78,7 +80,8 @@ public class JobSeekerController {
     public ResponseEntity<JobSeekerDto> updateJobSeeker(@PathVariable String email, @Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
         JobSeekerDto jobSeekerDto = jobSeekerService.updateJobSeeker(email, jobSeekerInputDto);
         if(jobSeekerDto == null) {
-            return ResponseEntity.notFound().build();
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het updaten van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
         return ResponseEntity.ok().body(jobSeekerDto);
@@ -88,7 +91,8 @@ public class JobSeekerController {
     public ResponseEntity<JobSeekerDto> getJobSeekerByEmail(@PathVariable String email) {
         JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerByEmail(email);
         if(jobSeekerDto == null) {
-            return ResponseEntity.notFound().build();
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het ophalen van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
         return ResponseEntity.ok().body(jobSeekerDto);

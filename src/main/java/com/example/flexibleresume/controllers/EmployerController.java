@@ -3,6 +3,7 @@ package com.example.flexibleresume.controllers;
 import com.example.flexibleresume.dtos.EmployerDto;
 import com.example.flexibleresume.dtos.EmployerInputDto;
 import com.example.flexibleresume.dtos.JobSeekerDto;
+import com.example.flexibleresume.exceptions.ErrorResponse;
 import com.example.flexibleresume.services.EmployerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,8 @@ public class EmployerController {
     public ResponseEntity<EmployerDto> getEmployerById(@PathVariable Long id) {
         EmployerDto employer = employerService.getEmployerById(id);
         if(employer == null) {
-            return ResponseEntity.notFound().build();
+           ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het ophalen van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.ok(employer);
     }
@@ -34,7 +36,8 @@ public class EmployerController {
     public ResponseEntity<EmployerDto> getJobSeekerByEmail(@PathVariable String email) {
         EmployerDto employerDto = employerService.getEmployerByEmail(email);
         if(employerDto == null) {
-            return ResponseEntity.notFound().build();
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het ophalen van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.ok().body(employerDto);
     }
@@ -43,7 +46,8 @@ public class EmployerController {
     public ResponseEntity<EmployerDto> addEmployer(@RequestBody EmployerInputDto employerInputDto) {
         EmployerDto newEmployer = employerService.addEmployer(employerInputDto);
         if(newEmployer == null) {
-            return ResponseEntity.badRequest().build();
+           ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het posten van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(newEmployer);
     }
@@ -52,7 +56,8 @@ public class EmployerController {
     public ResponseEntity<EmployerDto> updateEmployer(@PathVariable String email, @Valid @RequestBody EmployerInputDto employerInputDto) {
         EmployerDto updatedEmployer = employerService.updateEmployer(email, employerInputDto);
         if (updatedEmployer == null) {
-            return ResponseEntity.notFound().build();
+           ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het updaten van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
 

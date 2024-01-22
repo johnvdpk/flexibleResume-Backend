@@ -2,6 +2,7 @@ package com.example.flexibleresume.controllers;
 
 import com.example.flexibleresume.dtos.WorkInfoDto;
 import com.example.flexibleresume.dtos.WorkInfoInputDto;
+import com.example.flexibleresume.exceptions.ErrorResponse;
 import com.example.flexibleresume.models.WorkInfo;
 import com.example.flexibleresume.services.WorkInfoService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class WorkInfoController {
     private final WorkInfoService workInfoService;
 
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<WorkInfo>>getAllWorkinfos(@RequestParam(value = "id", required = false) Optional<Long> id) {
         List<WorkInfo> workInfo = workInfoService.getAllWorkInfos(id);
         if(workInfo == null) {
@@ -38,7 +39,8 @@ public class WorkInfoController {
     public ResponseEntity<List<WorkInfoDto>> getWorkInfoById(@PathVariable Long id) {
         List<WorkInfoDto> workInfoDtos = workInfoService.getWorkInfoById(id);
         if( workInfoDtos == null) {
-            return ResponseEntity.notFound().build();
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het ophalen van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
         return ResponseEntity.ok().body(workInfoDtos);
@@ -48,7 +50,8 @@ public class WorkInfoController {
     public ResponseEntity<List<WorkInfoDto>> getWorkInfoByCvId(@PathVariable Long cvId) {
         List<WorkInfoDto> workInfoDtos = workInfoService.getWorkInfoByCvId(cvId);
         if(workInfoDtos == null) {
-            return ResponseEntity.notFound().build();
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het ophalen van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.ok().body(workInfoDtos);
     }
@@ -59,7 +62,9 @@ public class WorkInfoController {
 
         WorkInfoDto workInfoDto = workInfoService.createWorkInfo(workInfoInputDto, cvId);
         if(workInfoDto == null) {
-            return ResponseEntity.badRequest().build();
+
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het posten van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(workInfoDto);
     }
@@ -68,7 +73,8 @@ public class WorkInfoController {
     public ResponseEntity<WorkInfoDto> updateWorkInfo(@PathVariable Long id, @RequestBody WorkInfoInputDto workInfoInputDto) {
         WorkInfoDto updatedWorkInfo = workInfoService.updateWorkInfo(id, workInfoInputDto);
         if(updatedWorkInfo == null) {
-            return ResponseEntity.notFound().build();
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het updaten van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.ok(updatedWorkInfo);
     }
