@@ -14,19 +14,14 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-class EmployerJobInfoDiffblueTest {
-    /**
-     * Method under test: {@link EmployerJobInfo#canEqual(Object)}
-     */
+class EmployerJobInfoTest {
+
     @Test
     void testCanEqual() {
         // Arrange, Act and Assert
         assertFalse((new EmployerJobInfo()).canEqual("Other"));
     }
 
-    /**
-     * Method under test: {@link EmployerJobInfo#canEqual(Object)}
-     */
     @Test
     void testCanEqual2() {
         // Arrange
@@ -162,34 +157,6 @@ class EmployerJobInfoDiffblueTest {
         assertTrue(employerJobInfo.canEqual(employerJobInfo2));
     }
 
-    /**
-     * Methods under test:
-     *
-     * <ul>
-     *   <li>{@link EmployerJobInfo#EmployerJobInfo()}
-     *   <li>{@link EmployerJobInfo#setEducation(String)}
-     *   <li>{@link EmployerJobInfo#setEmployer(Employer)}
-     *   <li>{@link EmployerJobInfo#setExtras(String)}
-     *   <li>{@link EmployerJobInfo#setId(Long)}
-     *   <li>{@link EmployerJobInfo#setJobDescription(String)}
-     *   <li>{@link EmployerJobInfo#setJobOffer(String)}
-     *   <li>{@link EmployerJobInfo#setJobRequirements(String)}
-     *   <li>{@link EmployerJobInfo#setSalaryIndication(String)}
-     *   <li>{@link EmployerJobInfo#setSkill(String)}
-     *   <li>{@link EmployerJobInfo#setYearsOfExperience(String)}
-     *   <li>{@link EmployerJobInfo#toString()}
-     *   <li>{@link EmployerJobInfo#getEducation()}
-     *   <li>{@link EmployerJobInfo#getEmployer()}
-     *   <li>{@link EmployerJobInfo#getExtras()}
-     *   <li>{@link EmployerJobInfo#getId()}
-     *   <li>{@link EmployerJobInfo#getJobDescription()}
-     *   <li>{@link EmployerJobInfo#getJobOffer()}
-     *   <li>{@link EmployerJobInfo#getJobRequirements()}
-     *   <li>{@link EmployerJobInfo#getSalaryIndication()}
-     *   <li>{@link EmployerJobInfo#getSkill()}
-     *   <li>{@link EmployerJobInfo#getYearsOfExperience()}
-     * </ul>
-     */
     @Test
     void testConstructor() {
         // Arrange and Act
@@ -311,35 +278,6 @@ class EmployerJobInfoDiffblueTest {
         assertSame(employer2, actualEmployer);
     }
 
-    /**
-     * Methods under test:
-     *
-     * <ul>
-     *   <li>
-     * {@link EmployerJobInfo#EmployerJobInfo(Long, Employer, String, String, String, String, String, String, String, String)}
-     *   <li>{@link EmployerJobInfo#setEducation(String)}
-     *   <li>{@link EmployerJobInfo#setEmployer(Employer)}
-     *   <li>{@link EmployerJobInfo#setExtras(String)}
-     *   <li>{@link EmployerJobInfo#setId(Long)}
-     *   <li>{@link EmployerJobInfo#setJobDescription(String)}
-     *   <li>{@link EmployerJobInfo#setJobOffer(String)}
-     *   <li>{@link EmployerJobInfo#setJobRequirements(String)}
-     *   <li>{@link EmployerJobInfo#setSalaryIndication(String)}
-     *   <li>{@link EmployerJobInfo#setSkill(String)}
-     *   <li>{@link EmployerJobInfo#setYearsOfExperience(String)}
-     *   <li>{@link EmployerJobInfo#toString()}
-     *   <li>{@link EmployerJobInfo#getEducation()}
-     *   <li>{@link EmployerJobInfo#getEmployer()}
-     *   <li>{@link EmployerJobInfo#getExtras()}
-     *   <li>{@link EmployerJobInfo#getId()}
-     *   <li>{@link EmployerJobInfo#getJobDescription()}
-     *   <li>{@link EmployerJobInfo#getJobOffer()}
-     *   <li>{@link EmployerJobInfo#getJobRequirements()}
-     *   <li>{@link EmployerJobInfo#getSalaryIndication()}
-     *   <li>{@link EmployerJobInfo#getSkill()}
-     *   <li>{@link EmployerJobInfo#getYearsOfExperience()}
-     * </ul>
-     */
     @Test
     void testConstructor2() {
         // Arrange
@@ -532,9 +470,6 @@ class EmployerJobInfoDiffblueTest {
         assertSame(employer4, actualEmployer);
     }
 
-    /**
-     * Method under test: {@link EmployerJobInfo#equals(Object)}
-     */
     @Test
     void testEquals() {
         // Arrange
@@ -622,9 +557,6 @@ class EmployerJobInfoDiffblueTest {
         assertNotEquals(employerJobInfo, null);
     }
 
-    /**
-     * Method under test: {@link EmployerJobInfo#equals(Object)}
-     */
     @Test
     void testEquals2() {
         // Arrange
@@ -712,14 +644,6 @@ class EmployerJobInfoDiffblueTest {
         assertNotEquals(employerJobInfo, "Different type to EmployerJobInfo");
     }
 
-    /**
-     * Methods under test:
-     *
-     * <ul>
-     *   <li>{@link EmployerJobInfo#equals(Object)}
-     *   <li>{@link EmployerJobInfo#hashCode()}
-     * </ul>
-     */
     @Test
     void testEquals3() {
         // Arrange
@@ -809,14 +733,6 @@ class EmployerJobInfoDiffblueTest {
         assertEquals(expectedHashCodeResult, employerJobInfo.hashCode());
     }
 
-    /**
-     * Methods under test:
-     *
-     * <ul>
-     *   <li>{@link EmployerJobInfo#equals(Object)}
-     *   <li>{@link EmployerJobInfo#hashCode()}
-     * </ul>
-     */
     @Test
     void testEquals4() {
         // Arrange
@@ -986,9 +902,6 @@ class EmployerJobInfoDiffblueTest {
         assertEquals(expectedHashCodeResult, employerJobInfo2.hashCode());
     }
 
-    /**
-     * Method under test: {@link EmployerJobInfo#equals(Object)}
-     */
     @Test
     void testEquals5() {
         // Arrange
@@ -1156,9 +1069,6 @@ class EmployerJobInfoDiffblueTest {
         assertNotEquals(employerJobInfo, employerJobInfo2);
     }
 
-    /**
-     * Method under test: {@link EmployerJobInfo#equals(Object)}
-     */
     @Test
     void testEquals6() {
         // Arrange
@@ -1326,9 +1236,6 @@ class EmployerJobInfoDiffblueTest {
         assertNotEquals(employerJobInfo, employerJobInfo2);
     }
 
-    /**
-     * Method under test: {@link EmployerJobInfo#equals(Object)}
-     */
     @Test
     void testEquals7() {
         // Arrange

@@ -1,6 +1,4 @@
 
-
-
 -- WERKZOEKENDE
 INSERT INTO jobseekers (id, first_name, sur_name, date_of_birth, email, phone_numbers, residences, zipcodes, home_addresses, house_numbers)
 VALUES

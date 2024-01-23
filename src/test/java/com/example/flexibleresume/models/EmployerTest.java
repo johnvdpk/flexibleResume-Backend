@@ -15,19 +15,15 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-class EmployerDiffblueTest {
-    /**
-     * Method under test: {@link Employer#canEqual(Object)}
-     */
+class EmployerTest {
+
     @Test
     void testCanEqual() {
         // Arrange, Act and Assert
         assertFalse((new Employer()).canEqual("Other"));
     }
 
-    /**
-     * Method under test: {@link Employer#canEqual(Object)}
-     */
+
     @Test
     void testCanEqual2() {
         // Arrange
@@ -171,40 +167,7 @@ class EmployerDiffblueTest {
         assertTrue(employer2.canEqual(employer4));
     }
 
-    /**
-     * Methods under test:
-     *
-     * <ul>
-     *   <li>{@link Employer#Employer()}
-     *   <li>{@link Employer#setCompany(String)}
-     *   <li>{@link Employer#setId(Long)}
-     *   <li>{@link Employer#setIndustry(String)}
-     *   <li>{@link Employer#setJobInfos(List)}
-     *   <li>{@link Employer#setKvk(String)}
-     *   <li>{@link Employer#setMission(String)}
-     *   <li>{@link Employer#setNumberOfEmployees(String)}
-     *   <li>{@link Employer#setOfficeAdress(String)}
-     *   <li>{@link Employer#setOfficeAdressNumber(String)}
-     *   <li>{@link Employer#setOfficeCityLocation(String)}
-     *   <li>{@link Employer#setOfficeZipcode(String)}
-     *   <li>{@link Employer#setUser(User)}
-     *   <li>{@link Employer#setVision(String)}
-     *   <li>{@link Employer#toString()}
-     *   <li>{@link Employer#getCompany()}
-     *   <li>{@link Employer#getId()}
-     *   <li>{@link Employer#getIndustry()}
-     *   <li>{@link Employer#getJobInfos()}
-     *   <li>{@link Employer#getKvk()}
-     *   <li>{@link Employer#getMission()}
-     *   <li>{@link Employer#getNumberOfEmployees()}
-     *   <li>{@link Employer#getOfficeAdress()}
-     *   <li>{@link Employer#getOfficeAdressNumber()}
-     *   <li>{@link Employer#getOfficeCityLocation()}
-     *   <li>{@link Employer#getOfficeZipcode()}
-     *   <li>{@link Employer#getUser()}
-     *   <li>{@link Employer#getVision()}
-     * </ul>
-     */
+
     @Test
     void testConstructor() {
         // Arrange and Act
@@ -378,42 +341,7 @@ class EmployerDiffblueTest {
         assertSame(jobInfos, actualJobInfos);
     }
 
-    /**
-     * Methods under test:
-     *
-     * <ul>
-     *   <li>
-     * {@link Employer#Employer(List, User, Long, String, String, String, String, String, String, String, String, String, String)}
-     *   <li>{@link Employer#Employer()}
-     *   <li>{@link Employer#setCompany(String)}
-     *   <li>{@link Employer#setId(Long)}
-     *   <li>{@link Employer#setIndustry(String)}
-     *   <li>{@link Employer#setJobInfos(List)}
-     *   <li>{@link Employer#setKvk(String)}
-     *   <li>{@link Employer#setMission(String)}
-     *   <li>{@link Employer#setNumberOfEmployees(String)}
-     *   <li>{@link Employer#setOfficeAdress(String)}
-     *   <li>{@link Employer#setOfficeAdressNumber(String)}
-     *   <li>{@link Employer#setOfficeCityLocation(String)}
-     *   <li>{@link Employer#setOfficeZipcode(String)}
-     *   <li>{@link Employer#setUser(User)}
-     *   <li>{@link Employer#setVision(String)}
-     *   <li>{@link Employer#toString()}
-     *   <li>{@link Employer#getCompany()}
-     *   <li>{@link Employer#getId()}
-     *   <li>{@link Employer#getIndustry()}
-     *   <li>{@link Employer#getJobInfos()}
-     *   <li>{@link Employer#getKvk()}
-     *   <li>{@link Employer#getMission()}
-     *   <li>{@link Employer#getNumberOfEmployees()}
-     *   <li>{@link Employer#getOfficeAdress()}
-     *   <li>{@link Employer#getOfficeAdressNumber()}
-     *   <li>{@link Employer#getOfficeCityLocation()}
-     *   <li>{@link Employer#getOfficeZipcode()}
-     *   <li>{@link Employer#getUser()}
-     *   <li>{@link Employer#getVision()}
-     * </ul>
-     */
+
     @Test
     void testConstructor2() {
         // Arrange
@@ -840,9 +768,7 @@ class EmployerDiffblueTest {
         assertNotEquals(employer4, null);
     }
 
-    /**
-     * Method under test: {@link Employer#equals(Object)}
-     */
+
     @Test
     void testEquals2() {
         // Arrange
@@ -976,14 +902,6 @@ class EmployerDiffblueTest {
         assertNotEquals(employer4, "Different type to Employer");
     }
 
-    /**
-     * Methods under test:
-     *
-     * <ul>
-     *   <li>{@link Employer#equals(Object)}
-     *   <li>{@link Employer#hashCode()}
-     * </ul>
-     */
     @Test
     void testEquals3() {
         // Arrange
@@ -1119,14 +1037,6 @@ class EmployerDiffblueTest {
         assertEquals(expectedHashCodeResult, employer4.hashCode());
     }
 
-    /**
-     * Methods under test:
-     *
-     * <ul>
-     *   <li>{@link Employer#equals(Object)}
-     *   <li>{@link Employer#hashCode()}
-     * </ul>
-     */
     @Test
     void testEquals4() {
         // Arrange

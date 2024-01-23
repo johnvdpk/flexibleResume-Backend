@@ -6,6 +6,7 @@ import com.example.flexibleresume.repositorys.*;
 import com.example.flexibleresume.user.Role;
 import com.example.flexibleresume.user.User;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,6 +31,7 @@ public class AuthenticationService {
     private final EmployerRepository employerRepos;
     private final EmployerJobInfoRepository employerJobInfoRepos;
 
+    @Transactional
     public AuthenticationResponse register(RegisterRequest request) {
 
         Optional<User> existingUser = userRepos.findByEmail(request.getEmail());
