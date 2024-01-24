@@ -38,6 +38,6 @@ VALUES
 -- SECURITY TEST
 INSERT INTO users (id, email, password, role, jobseeker_id, employer_id)
 VALUES
-    (100, 'johndoe@email.com', '$2a$10$gx6n5iAnrzzc8EPwNKVje.1bYs/FJzrgfj.NrHPzGYMyiOIUG.pye', 'USER', 100, null),
-    (200, 'company@email.com', '$2a$10$gx6n5iAnrzzc8EPwNKVje.1bYs/FJzrgfj.NrHPzGYMyiOIUG.pye', 'COMPANY', null, 100),
-    (300, 'admin@email.com', '$2a$10$gx6n5iAnrzzc8EPwNKVje.1bYs/FJzrgfj.NrHPzGYMyiOIUG.pye', 'ADMIN', null, null);
+    (100, 'johndoe@email.com', '$2a$10$4swew8oOgCAOTg3837tfWOgUlT0ofErBdPqc8yrOiBtNkfj4KKdgy', 'USER', 100, null),
+    (200, 'company@email.com', '$2a$10$4swew8oOgCAOTg3837tfWOgUlT0ofErBdPqc8yrOiBtNkfj4KKdgy', 'COMPANY', null, 100),
+    (300, 'admin@email.com', '$2a$10$4swew8oOgCAOTg3837tfWOgUlT0ofErBdPqc8yrOiBtNkfj4KKdgy', 'ADMIN', null, null);

@@ -28,24 +28,21 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // CORS configuration
                 .cors().configurationSource(corsConfigurationSource())
                 .and()
-                // Disable CSRF as we are stateless
                 .csrf().disable()
                 .httpBasic().disable()
-                // Session management
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                // Define URL patterns and their security requirements
+
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(new AntPathRequestMatcher("/auth/register", "POST")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/auth/authenticate", "POST")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/jobseeker/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/employer/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/jobseeker/**")).hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/employer/**")).hasAnyAuthority("COMPANY", "ADMIN")
 
-//                        .requestMatchers(new AntPathRequestMatcher("/jobseeker/**")).hasAnyRole("USER", "ADMIN") // Spring adds "ROLE_" prefix automatically
+//                        .requestMatchers(new AntPathRequestMatcher("/jobseeker/**")).hasRole("USER")
 //                        .requestMatchers(new AntPathRequestMatcher("/employer/**")).hasAnyRole("COMPANY", "ADMIN")
                         .anyRequest().authenticated()
                 )
@@ -60,8 +57,6 @@ public class SecurityConfiguration {
     private CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // Specify the allowed origins or use patterns
-        // Example: configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://yourdomain.com"));
         configuration.setAllowedOriginPatterns(List.of("*")); // Use patterns instead of direct origins
 
         configuration.setAllowedMethods(List.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));

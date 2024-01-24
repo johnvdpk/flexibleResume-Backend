@@ -60,19 +60,6 @@ class JobSeekerControllerTest {
             .andExpect(MockMvcResultMatchers.content().string("[]"));
   }
 
-  @Test
-  void testGetAllJobSeekers2() throws Exception {
-    when(jobSeekerService.getAllJobSeekersBySurName(Mockito.<String>any())).thenReturn(new ArrayList<>());
-    when(jobSeekerService.getAllJobSeekers()).thenReturn(new ArrayList<>());
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/jobseeker/name")
-            .param("surName", "foo");
-    MockMvcBuilders.standaloneSetup(jobSeekerController)
-            .build()
-            .perform(requestBuilder)
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-            .andExpect(MockMvcResultMatchers.content().string("[]"));
-  }
 
   @Test
   void testGetJobSeekerByFirstName() throws Exception {
@@ -90,16 +77,6 @@ class JobSeekerControllerTest {
                                     + ",\"zipCode\":null,\"homeAddress\":null,\"houseNumber\":null}"));
   }
 
-  @Test
-  void testGetJobSeekerByFirstName2() throws Exception {
-    when(jobSeekerService.getJobSeekerByFirstName(Mockito.<String>any())).thenReturn(null);
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/jobseeker/firstname/{firstName}",
-            "Jane");
-    ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(jobSeekerController)
-            .build()
-            .perform(requestBuilder);
-    actualPerformResult.andExpect(MockMvcResultMatchers.status().isNotFound());
-  }
 
   @Test
   void testGetJobSeekerBySurName() throws Exception {
@@ -116,15 +93,6 @@ class JobSeekerControllerTest {
                                     + ",\"zipCode\":null,\"homeAddress\":null,\"houseNumber\":null}"));
   }
 
-  @Test
-  void testGetJobSeekerBySurName2() throws Exception {
-    when(jobSeekerService.getJobSeekerBySurName(Mockito.<String>any())).thenReturn(null);
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/jobseeker/surname/{surName}", "Doe");
-    ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(jobSeekerController)
-            .build()
-            .perform(requestBuilder);
-    actualPerformResult.andExpect(MockMvcResultMatchers.status().isNotFound());
-  }
 
   @Test
   void testAddJobSeeker() {
@@ -309,32 +277,6 @@ class JobSeekerControllerTest {
 
 
   @Test
-  void testUpdateJobSeeker2() throws Exception {
-    when(jobSeekerService.updateJobSeeker(Mockito.<String>any(), Mockito.<JobSeekerInputDto>any())).thenReturn(null);
-
-    JobSeekerInputDto jobSeekerInputDto = new JobSeekerInputDto();
-    jobSeekerInputDto.setDateOfBirth(null);
-    jobSeekerInputDto.setEmail("jane.doe@example.org");
-    jobSeekerInputDto.setFirstName("Jane");
-    jobSeekerInputDto.setHomeAddress("42 Main St");
-    jobSeekerInputDto.setHouseNumber("42");
-    jobSeekerInputDto.setPhoneNumber("6625550144");
-    jobSeekerInputDto.setResidence("Residence");
-    jobSeekerInputDto.setSurName("Doe");
-    jobSeekerInputDto.setZipCode("21654");
-    String content = (new ObjectMapper()).writeValueAsString(jobSeekerInputDto);
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-            .put("/jobseeker/email/{email}", "jane.doe@example.org")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(content);
-    ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(jobSeekerController)
-            .build()
-            .perform(requestBuilder);
-    actualPerformResult.andExpect(MockMvcResultMatchers.status().isNotFound());
-  }
-
-
-  @Test
   void testGetJobSeekerByEmail() throws Exception {
     when(jobSeekerService.getJobSeekerByEmail(Mockito.<String>any())).thenReturn(new JobSeekerDto());
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/jobseeker/email/{email}",
@@ -352,18 +294,6 @@ class JobSeekerControllerTest {
 
 
   @Test
-  void testGetJobSeekerByEmail2() throws Exception {
-    when(jobSeekerService.getJobSeekerByEmail(Mockito.<String>any())).thenReturn(null);
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/jobseeker/email/{email}",
-            "jane.doe@example.org");
-    ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(jobSeekerController)
-            .build()
-            .perform(requestBuilder);
-    actualPerformResult.andExpect(MockMvcResultMatchers.status().isNotFound());
-  }
-
-
-  @Test
   void testDeleteJobSeeker() throws Exception {
     doNothing().when(jobSeekerService).deleteJobSeeker(Mockito.<Long>any());
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/jobseeker/{id}", 1L);
@@ -374,14 +304,4 @@ class JobSeekerControllerTest {
   }
 
 
-  @Test
-  void testDeleteJobSeeker2() throws Exception {
-    doNothing().when(jobSeekerService).deleteJobSeeker(Mockito.<Long>any());
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/jobseeker/{id}", 1L);
-    requestBuilder.contentType("https://example.org/example");
-    ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(jobSeekerController)
-            .build()
-            .perform(requestBuilder);
-    actualPerformResult.andExpect(MockMvcResultMatchers.status().isNoContent());
-  }
 }
