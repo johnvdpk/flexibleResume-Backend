@@ -24,7 +24,7 @@ public class StudyInfoController {
         List<StudyInfoDto> studyInfos = studyInfoService.getAllStudyInfos();
         if(studyInfos == null) {
             ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het ophalen van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(List.of());
         }
         return ResponseEntity.ok().body(studyInfos);
     }
@@ -34,7 +34,7 @@ public class StudyInfoController {
         List<StudyInfoDto> studyInfoDtos = studyInfoService.getStudyInfoByCvId(cvId);
         if(studyInfoDtos == null) {
            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het ophalen van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(List.of());
         }
         return ResponseEntity.ok().body(studyInfoDtos);
     }

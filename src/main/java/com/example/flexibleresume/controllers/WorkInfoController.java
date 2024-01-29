@@ -40,7 +40,7 @@ public class WorkInfoController {
         List<WorkInfoDto> workInfoDtos = workInfoService.getWorkInfoById(id);
         if( workInfoDtos == null) {
             ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het ophalen van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(List.of());
         }
 
         return ResponseEntity.ok().body(workInfoDtos);
@@ -51,7 +51,7 @@ public class WorkInfoController {
         List<WorkInfoDto> workInfoDtos = workInfoService.getWorkInfoByCvId(cvId);
         if(workInfoDtos == null) {
             ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het ophalen van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(List.of());
         }
         return ResponseEntity.ok().body(workInfoDtos);
     }

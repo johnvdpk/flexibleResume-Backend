@@ -52,9 +52,7 @@ class JobSeekerServiceTest {
   @MockBean
   private UserRepository userRepository;
 
-  /**
-   * Method under test: {@link JobSeekerService#jobSeekerToDto(JobSeeker)}
-   */
+
   @Test
   void testJobSeekerToDto() {
     User user = new User();
@@ -135,9 +133,7 @@ class JobSeekerServiceTest {
     assertEquals("jane.doe@example.org", actualJobSeekerToDtoResult.getEmail());
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#jobSeekerToDto(JobSeeker)}
-   */
+
   @Test
   void testJobSeekerToDto2() {
     User user = new User();
@@ -259,10 +255,7 @@ class JobSeekerServiceTest {
     assertEquals("jane.doe@example.org", actualJobSeekerToDtoResult.getEmail());
   }
 
-  /**
-   * Method under test:
-   * {@link JobSeekerService#inputDtoToJobSeeker(JobSeekerInputDto)}
-   */
+
   @Test
   void testInputDtoToJobSeeker() {
     JobSeeker actualInputDtoToJobSeekerResult = jobSeekerService.inputDtoToJobSeeker(new JobSeekerInputDto());
@@ -278,10 +271,7 @@ class JobSeekerServiceTest {
     assertTrue(actualInputDtoToJobSeekerResult.getCvs().isEmpty());
   }
 
-  /**
-   * Method under test:
-   * {@link JobSeekerService#inputDtoToJobSeeker(JobSeekerInputDto)}
-   */
+
   @Test
   void testInputDtoToJobSeeker2() {
     JobSeekerInputDto jobSeekerInputDto = mock(JobSeekerInputDto.class);
@@ -316,9 +306,7 @@ class JobSeekerServiceTest {
     assertTrue(actualInputDtoToJobSeekerResult.getCvs().isEmpty());
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#addCVToJobSeeker(Long, CV)}
-   */
+
   @Test
   void testAddCVToJobSeeker() throws UnsupportedEncodingException {
     User user = new User();
@@ -535,9 +523,7 @@ class JobSeekerServiceTest {
     assertSame(jobSeeker2, cv2.getJobSeeker());
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#addCVToJobSeeker(Long, CV)}
-   */
+
   @Test
   void testAddCVToJobSeeker2() throws UnsupportedEncodingException {
     User user = new User();
@@ -675,9 +661,7 @@ class JobSeekerServiceTest {
     verify(cVRepository).save(Mockito.<CV>any());
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#getAllJobSeekers()}
-   */
+
   @Test
   void testGetAllJobSeekers() {
     when(jobSeekerRepository.findAll()).thenReturn(new ArrayList<>());
@@ -686,9 +670,7 @@ class JobSeekerServiceTest {
     assertTrue(actualAllJobSeekers.isEmpty());
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#getAllJobSeekers()}
-   */
+
   @Test
   void testGetAllJobSeekers2() {
     User user = new User();
@@ -766,9 +748,7 @@ class JobSeekerServiceTest {
     assertEquals(1, actualAllJobSeekers.size());
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#getAllJobSeekers()}
-   */
+
   @Test
   void testGetAllJobSeekers3() {
     when(jobSeekerRepository.findAll()).thenThrow(new RecordNotFoundException("An error occurred"));
@@ -776,9 +756,6 @@ class JobSeekerServiceTest {
     verify(jobSeekerRepository).findAll();
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#getAllJobSeekersBySurName(String)}
-   */
   @Test
   void testGetAllJobSeekersBySurName() {
     when(jobSeekerRepository.findAllJobSeekersBySurName(Mockito.<String>any())).thenReturn(new ArrayList<>());
@@ -787,9 +764,7 @@ class JobSeekerServiceTest {
     assertTrue(actualAllJobSeekersBySurName.isEmpty());
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#getAllJobSeekersBySurName(String)}
-   */
+
   @Test
   void testGetAllJobSeekersBySurName2() {
     User user = new User();
@@ -867,9 +842,7 @@ class JobSeekerServiceTest {
     assertEquals(1, actualAllJobSeekersBySurName.size());
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#getAllJobSeekersBySurName(String)}
-   */
+
   @Test
   void testGetAllJobSeekersBySurName3() {
     when(jobSeekerRepository.findAllJobSeekersBySurName(Mockito.<String>any()))
@@ -878,9 +851,7 @@ class JobSeekerServiceTest {
     verify(jobSeekerRepository).findAllJobSeekersBySurName(Mockito.<String>any());
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#getJobSeekerByFirstName(String)}
-   */
+
   @Test
   void testGetJobSeekerByFirstName() {
     User user = new User();
@@ -964,9 +935,7 @@ class JobSeekerServiceTest {
     assertEquals("jane.doe@example.org", actualJobSeekerByFirstName.getEmail());
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#getJobSeekerBySurName(String)}
-   */
+
   @Test
   void testGetJobSeekerBySurName() {
     User user = new User();
@@ -1050,9 +1019,7 @@ class JobSeekerServiceTest {
     assertEquals("jane.doe@example.org", actualJobSeekerBySurName.getEmail());
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#getJobSeekerByEmail(String)}
-   */
+
   @Test
   void testGetJobSeekerByEmail() {
     Employer employer = new Employer();
@@ -1180,9 +1147,7 @@ class JobSeekerServiceTest {
     assertEquals("jane.doe@example.org", actualJobSeekerByEmail.getEmail());
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#addJobSeeker(JobSeekerInputDto)}
-   */
+
   @Test
   void testAddJobSeeker() {
     Employer employer = new Employer();
@@ -1323,10 +1288,7 @@ class JobSeekerServiceTest {
     assertNull(actualAddJobSeekerResult.getDateOfBirth());
   }
 
-  /**
-   * Method under test:
-   * {@link JobSeekerService#updateJobSeeker(String, JobSeekerInputDto)}
-   */
+
   @Test
   void testUpdateJobSeeker() {
     Employer employer = new Employer();
@@ -1582,10 +1544,7 @@ class JobSeekerServiceTest {
     assertEquals("jane.doe@example.org", actualUpdateJobSeekerResult.getEmail());
   }
 
-  /**
-   * Method under test:
-   * {@link JobSeekerService#updateJobSeeker(String, JobSeekerInputDto)}
-   */
+
   @Test
   void testUpdateJobSeeker2() {
     when(jobSeekerRepository.save(Mockito.<JobSeeker>any()))
@@ -1709,9 +1668,7 @@ class JobSeekerServiceTest {
     verify(jobSeekerRepository).save(Mockito.<JobSeeker>any());
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#deleteJobSeeker(Long)}
-   */
+
   @Test
   void testDeleteJobSeeker() {
     doNothing().when(jobSeekerRepository).deleteById(Mockito.<Long>any());
@@ -1719,9 +1676,7 @@ class JobSeekerServiceTest {
     verify(jobSeekerRepository).deleteById(Mockito.<Long>any());
   }
 
-  /**
-   * Method under test: {@link JobSeekerService#deleteJobSeeker(Long)}
-   */
+
   @Test
   void testDeleteJobSeeker2() {
     doThrow(new RecordNotFoundException("An error occurred")).when(jobSeekerRepository).deleteById(Mockito.<Long>any());

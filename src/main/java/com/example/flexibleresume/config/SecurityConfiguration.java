@@ -39,11 +39,14 @@ public class SecurityConfiguration {
                         .requestMatchers(new AntPathRequestMatcher("/auth/register", "POST")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/auth/authenticate", "POST")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/jobseeker/**")).hasAnyAuthority("USER", "ADMIN")
-                        .requestMatchers(new AntPathRequestMatcher("/employer/**")).hasAnyAuthority("COMPANY", "ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/jobseeker/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/employer/**")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/jobseeker/name")).hasAnyAuthority("USER","COMPANY", "ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/jobseeker/workinfo")).hasAnyAuthority("USER","COMPANY", "ADMIN")
+                                .requestMatchers(new AntPathRequestMatcher("/jobseeker/**")).hasAnyAuthority("USER", "ADMIN")
+                                .requestMatchers(new AntPathRequestMatcher("/employer/**")).hasAnyAuthority("COMPANY", "ADMIN")
 
-//                        .requestMatchers(new AntPathRequestMatcher("/jobseeker/**")).hasRole("USER")
-//                        .requestMatchers(new AntPathRequestMatcher("/employer/**")).hasAnyRole("COMPANY", "ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 // Authentication provider
