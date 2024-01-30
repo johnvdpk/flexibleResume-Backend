@@ -2,6 +2,7 @@ package com.example.flexibleresume.controllers;
 
 import com.example.flexibleresume.dtos.JobSeekerDto;
 import com.example.flexibleresume.dtos.JobSeekerInputDto;
+import com.example.flexibleresume.exceptions.ErrorResponse;
 import com.example.flexibleresume.services.JobSeekerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/werkzoekende") // website is in het Nederlands
+@RequestMapping("/jobseeker")
 public class JobSeekerController {
 
 
@@ -23,7 +24,7 @@ public class JobSeekerController {
 
 
 
-    @GetMapping("/naam")
+    @GetMapping("/name")
     public ResponseEntity<List<JobSeekerDto>> getAllJobSeekers(@RequestParam(value = "surName", required = false) Optional<String> surName) {
 
         List<JobSeekerDto> jobSeekerDtos;
@@ -42,16 +43,22 @@ public class JobSeekerController {
     }
 
 
-    @GetMapping("/voornaam/{firstName}")
+    @GetMapping("/firstname/{firstName}")
     public ResponseEntity<JobSeekerDto> getJobSeekerByFirstName(@PathVariable String firstName) {
         JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerByFirstName(firstName);
+        if(jobSeekerDto == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         return ResponseEntity.ok(jobSeekerDto);
     }
 
-    @GetMapping("/achternaam/{surName}")
+    @GetMapping("/surname/{surName}")
     public ResponseEntity<JobSeekerDto> getJobSeekerBySurName(@PathVariable String surName) {
         JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerBySurName(surName);
+        if(jobSeekerDto == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         return ResponseEntity.ok(jobSeekerDto);
     }
@@ -61,6 +68,10 @@ public class JobSeekerController {
     public ResponseEntity<JobSeekerDto> addJobSeeker(@RequestBody JobSeekerInputDto jobSeekerInputDto)
     {
         JobSeekerDto jobSeekerDto = jobSeekerService.addJobSeeker(jobSeekerInputDto);
+        if(jobSeekerDto == null) {
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het posten van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(jobSeekerDto);
     }
 
@@ -68,6 +79,10 @@ public class JobSeekerController {
     @PutMapping("/email/{email}")
     public ResponseEntity<JobSeekerDto> updateJobSeeker(@PathVariable String email, @Valid @RequestBody JobSeekerInputDto jobSeekerInputDto) {
         JobSeekerDto jobSeekerDto = jobSeekerService.updateJobSeeker(email, jobSeekerInputDto);
+        if(jobSeekerDto == null) {
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het updaten van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
 
         return ResponseEntity.ok().body(jobSeekerDto);
     }
@@ -75,6 +90,10 @@ public class JobSeekerController {
     @GetMapping("/email/{email}")
     public ResponseEntity<JobSeekerDto> getJobSeekerByEmail(@PathVariable String email) {
         JobSeekerDto jobSeekerDto = jobSeekerService.getJobSeekerByEmail(email);
+        if(jobSeekerDto == null) {
+            ErrorResponse error = new ErrorResponse("Er is een fout opgetreden bij het ophalen van de gegevens.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
 
         return ResponseEntity.ok().body(jobSeekerDto);
     }

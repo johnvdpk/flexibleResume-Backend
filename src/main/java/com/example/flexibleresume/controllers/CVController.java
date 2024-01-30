@@ -8,7 +8,9 @@ import com.example.flexibleresume.models.CV;
 import com.example.flexibleresume.services.CVService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -16,29 +18,33 @@ import org.springframework.http.MediaType;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/werkzoekende/cv") // website is in het Nederlands
+@RequestMapping("/jobseeker/cv")
 public class CVController {
 
     final private CVService cVService;
 
 
     @GetMapping
-    public ResponseEntity<List<CV>> getAllCVs(@RequestParam (value = "id", required = false)Optional<Long> id) {
+    public ResponseEntity<List<CV>> getAllCVs(@RequestParam (value = "id", required = false) Optional<Long> id) {
         List<CV> CVs = cVService.getAllCVs(id);
-
+        if (CVs == null) {
+            CVs = Collections.emptyList();
+        }
         return ResponseEntity.ok().body(CVs);
     }
 
+
     @GetMapping("/{id}")
-    public ResponseEntity<CVDto> getCVById(@PathVariable Long id) {
+    public ResponseEntity<?> getCVById(@PathVariable Long id) {
         CVDto cVDto = cVService.getCVById(id);
+        if (cVDto == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("CV met ID " + id + " is niet gevonden.");
+        }
 
         return ResponseEntity.ok(cVDto);
     }
@@ -46,6 +52,9 @@ public class CVController {
     @PutMapping("/cv/{cvId}")
     public ResponseEntity<CVDto> updateCV(@PathVariable Long cvId, @RequestBody CVInputDto cvInputDto) {
         CVDto updatedCV = cVService.updateCV(cvId, cvInputDto);
+        if(updatedCV == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
         return ResponseEntity.ok(updatedCV);
     }
 
@@ -55,7 +64,7 @@ public class CVController {
         CV cv = cVService.uploadFileDocument(file, cvId);
         String url = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
-                .path("/werkzoekende/cv/download/")
+                .path("/jobseeker/cv/download/")
                 .path(Objects.requireNonNull(file.getOriginalFilename()))
                 .toUriString();
 

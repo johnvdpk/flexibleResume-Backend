@@ -1,6 +1,5 @@
 package com.example.flexibleresume.config;
 
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +10,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -21,43 +26,49 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
 
     @Bean
-    public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
-
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-                .httpBasic(basic -> basic.disable())
-                .authorizeHttpRequests(auth ->
-                        auth
-
-         .requestMatchers("/**").permitAll()
-
-                 .requestMatchers("/auth/**").hasAnyRole("USER", "ADMIN")
-                .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                .requestMatchers(HttpMethod.POST,"/auth/authenticate").hasAnyRole("USER","ADMIN")
-
-                .requestMatchers(HttpMethod.POST, "/werkzoekende/**").hasAnyRole("USER","ADMIN")
-                .requestMatchers(HttpMethod.GET,"/werkzoekende/**").hasAnyRole("USER","ADMIN")
-                .requestMatchers(HttpMethod.POST,"/werkzoekende/**").hasAnyRole("USER","ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/werkzoekende/**").hasAnyRole("USER","ADMIN")
-                .requestMatchers("/werkzoekende/**").hasAnyRole("USER","ADMIN")
-                .requestMatchers(HttpMethod.POST, "/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
-                .requestMatchers(HttpMethod.GET,"/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
-                .requestMatchers(HttpMethod.POST,"/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
-                .requestMatchers("/bedrijf/**").hasAnyRole("COMPANY","ADMIN")
-
-                .anyRequest().authenticated()
-
-                )
-
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .cors().configurationSource(corsConfigurationSource())
                 .and()
+                .csrf().disable()
+                .httpBasic().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(new AntPathRequestMatcher("/auth/register", "POST")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/auth/authenticate", "POST")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/jobseeker/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/employer/**")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/jobseeker/name")).hasAnyAuthority("USER","COMPANY", "ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/jobseeker/workinfo")).hasAnyAuthority("USER","COMPANY", "ADMIN")
+                                .requestMatchers(new AntPathRequestMatcher("/jobseeker/**")).hasAnyAuthority("USER", "ADMIN")
+                                .requestMatchers(new AntPathRequestMatcher("/employer/**")).hasAnyAuthority("COMPANY", "ADMIN")
+
+
+                        .anyRequest().authenticated()
+                )
+                // Authentication provider
                 .authenticationProvider(authenticationProvider)
+                // JWT filter
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
+    private CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
 
+        configuration.setAllowedOriginPatterns(List.of("*")); // Use patterns instead of direct origins
+
+        configuration.setAllowedMethods(List.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setExposedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 }

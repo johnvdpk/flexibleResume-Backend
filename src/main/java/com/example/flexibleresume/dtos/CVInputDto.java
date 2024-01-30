@@ -1,5 +1,8 @@
 package com.example.flexibleresume.dtos;
 
+import com.example.flexibleresume.models.PersonalInfo;
+import com.example.flexibleresume.models.StudyInfo;
+import com.example.flexibleresume.models.WorkInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +18,8 @@ public class CVInputDto {
     private String url;
     private String contentType;
     private String aboutMe;
-    private List workInfos;
-    private List personalInfos;
-    private List studyInfos;
+    private List<WorkInfoInputDto> workInfos;
+    private List<PersonalInfoInputDto> personalInfos;
+    private List<StudyInfoInputDto> studyInfos;
+
 }

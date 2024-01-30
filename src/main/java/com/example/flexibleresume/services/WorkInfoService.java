@@ -81,13 +81,11 @@ public class WorkInfoService {
 
         WorkInfo workInfo = inputDtoToWorkInfo(workInfoInputDto);
 
-        workInfo.setCv(cv); // Koppel het CV-object aan WorkInfo
-        workInfo = workInfoRepos.save(workInfo); // Sla de WorkInfo op
-
+        workInfo.setCv(cv);
+        workInfo = workInfoRepos.save(workInfo);
 
         return workInfoToDto(workInfo);
     }
-
 
 
     public List<WorkInfoDto> getWorkInfoById(Long id) {
@@ -114,8 +112,6 @@ public class WorkInfoService {
 
         return workInfoToDto(existingWorkInfo);
     }
-
-
 
 
     public void deleteWorkInfo(Long id) {

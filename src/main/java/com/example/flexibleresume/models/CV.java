@@ -24,18 +24,12 @@ public class CV {
     private byte[] docFile;
     private String fileName;
 
-
     @Column(name = "about_me", length = 500)
     private String aboutMe;
 
-
-
-    // CV is gekoppeld aan de Jobseeker. De JobSeeker mag meerdere CV's hebben.
     @ManyToOne
     @JoinColumn(name = "jobseeker_id")
     private JobSeeker jobSeeker;
-
-    // WorkInfo, PersonalInfo en StudyInfo is gekoppeld aan CV. Meedere van deze klasse kunnen in een cv zitten.
 
     @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WorkInfo> workInfos = new ArrayList<>();

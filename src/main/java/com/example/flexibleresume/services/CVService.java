@@ -47,21 +47,18 @@ public class CVService {
 
 
     public CVDto updateCV(Long cvId, CVInputDto cvInputDto) {
-        // Zoek het CV-object op basis van het cvId
+
         CV cv = cVRepos.findById(cvId)
                 .orElseThrow(() -> new RecordNotFoundException("CV niet gevonden met id: " + cvId));
 
-        // Update de velden van het CV-object met de waarden uit cvInputDto
         if (cvInputDto.getAboutMe() != null) {
             cv.setAboutMe(cvInputDto.getAboutMe());
         }
 
-        // Voeg hier eventueel meer veldupdates toe indien nodig
 
-        // Sla het bijgewerkte CV-object op
         CV updatedCV = cVRepos.save(cv);
 
-        // Converteer het bijgewerkte CV-object naar een CVDto en retourneer het
+
         return CVtoDto(updatedCV);
     }
 
